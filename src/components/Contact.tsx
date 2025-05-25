@@ -40,7 +40,7 @@ const Contact = () => {
                   onClick={() => navigate('/schedule')}
                 >
                   <Calendar className="w-6 h-6 mr-3" />
-                  {language === 'fr' ? 'Réserver un Call Découverte' : 'Book a Discovery Call'}
+                  {language === 'fr' ? 'Réserver un Appel' : 'Book a Discovery Call'}
                   <MoveUpRight className="w-5 h-5 ml-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Button>
               </div>

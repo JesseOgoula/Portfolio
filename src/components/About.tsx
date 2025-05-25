@@ -1,7 +1,15 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const About = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const description = t('about.description');
+  const halfLength = Math.floor(description.length / 2);
+  const truncatedDescription = description.slice(0, halfLength) + '...';
 
   return (
     <section id="a-propos" className="py-20 bg-white relative overflow-hidden">
@@ -22,9 +30,37 @@ const About = () => {
           </div>
 
           <div className="bg-navy-800 rounded-2xl p-8 lg:p-12 shadow-lg">
-            <p className="font-inter text-white leading-relaxed text-lg text-justify">
-              {t('about.description')}
-            </p>
+            <div className="relative">
+              <p className="font-inter text-white leading-relaxed text-lg text-justify">
+                {/* Sur desktop ou lorsque le texte est développé, afficher tout le texte */}
+                <span className="hidden lg:block">{description}</span>
+                {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
+                <span className="block lg:hidden">
+                  {isExpanded ? description : truncatedDescription}
+                </span>
+              </p>
+
+              {/* Bouton "voir plus" uniquement sur mobile */}
+              <div className="mt-4 text-center block lg:hidden">
+                <Button
+                  variant="ghost"
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="text-white hover:text-primary transition-colors"
+                >
+                  {isExpanded ? (
+                    <>
+                      {language === 'fr' ? 'Voir moins' : 'Show less'}
+                      <ChevronUp className="ml-2 h-4 w-4" />
+                    </>
+                  ) : (
+                    <>
+                      {language === 'fr' ? 'Voir plus' : 'Show more'}
+                      <ChevronDown className="ml-2 h-4 w-4" />
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
