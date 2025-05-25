@@ -18,8 +18,8 @@ const CVDownloadModal = ({ isOpen, onClose }: CVDownloadModalProps) => {
   const handleDownload = (lang: 'fr' | 'en') => {
     // Ici, vous devrez remplacer par les vrais liens vers vos CV
     const cvLinks = {
-      fr: '/cv-francais.pdf',
-      en: '/cv-english.pdf'
+      fr: '/Cv/CVjesse - French.pdf',
+      en: '/Cv/CVjesse - English.pdf'
     };
     
     // Créer un lien temporaire pour télécharger

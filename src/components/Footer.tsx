@@ -30,7 +30,11 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="font-poppins font-bold text-2xl mb-4">
-              Portfolio
+              <img 
+                src="/logored.png" 
+                alt="Ogoula Jesse Logo" 
+                className="h-12 w-auto brightness-0 invert transition-transform duration-300 hover:scale-105"
+              />
             </div>
             <p className="font-inter text-gray-300 leading-relaxed mb-6">
               {t('footer.description')}
