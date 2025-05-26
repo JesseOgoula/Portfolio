@@ -103,7 +103,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row md:justify-center items-center">
           <div className="font-inter text-gray-400">
-            © {currentYear} Portfolio. {t('footer.rights')}
+            © {currentYear} Ogoula Jesse. {t('footer.rights')}
           </div>
         </div>
       </div>
