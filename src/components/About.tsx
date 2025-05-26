@@ -31,11 +31,11 @@ const About = () => {
 
           <div className="bg-navy-800 rounded-2xl p-8 lg:p-12 shadow-lg">
             <div className="relative">
-              <p className="font-inter text-white leading-relaxed text-lg text-center">
+              <p className="font-inter text-white leading-relaxed text-lg text-center max-w-3xl mx-auto">
                 {/* Sur desktop ou lorsque le texte est développé, afficher tout le texte */}
                 <span className="hidden lg:block">{description}</span>
                 {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
-                <span className="block lg:hidden">
+                <span className="block lg:hidden max-w-full">
                   {isExpanded ? description : truncatedDescription}
                 </span>
               </p>
