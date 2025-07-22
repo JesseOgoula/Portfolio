@@ -64,6 +64,22 @@ const Projects = () => {
         { label: language === 'fr' ? 'Temps moyen / visite' : 'Avg. time / visit', value: '4m20s' },
         { label: language === 'fr' ? 'Satisfaction utilisateurs' : 'User satisfaction', value: '95%' }
       ]
+    },
+    {
+      title: 'CodeSchool',
+      category: language === 'fr' ? 'Plateforme pédagogique' : 'Learning Platform',
+      duration: language === 'fr' ? '6 mois' : '6 months',
+      description: language === 'fr'
+        ? "Dans le cadre de ma mission à École 241 (Ogooue Labs), j'ai conçu CodeSchool : une plateforme pédagogique pensée pour centraliser nos activités et mieux accompagner les apprenants. J'ai assuré la conception produit (product management, design, fonctionnalités) tandis que le développement technique a été réalisé par mon collègue Yohann Obiang.\nPour en savoir plus :"
+        : "As part of my mission at École 241 (Ogooue Labs), I designed CodeSchool: a learning platform created to centralize our activities and better support learners. I was responsible for product conception (product management, design, features) while the technical development was carried out by my colleague Yohann Obiang.\nLearn more:",
+      logo: '/logos/E241 NOIR.png',
+      banner: '/code school.jpg',
+      link: 'https://www.yohannobiang.com/codeschool.html',
+      stats: [
+        { label: language === 'fr' ? 'Utilisateurs' : 'Users', value: '20+' },
+        { label: language === 'fr' ? 'Modules' : 'Modules', value: '12' },
+        { label: language === 'fr' ? 'Satisfaction' : 'Satisfaction', value: '98%' }
+      ]
     }
   ];
 
@@ -120,6 +136,14 @@ const Projects = () => {
                   </h3>
                   <p className="text-gray-600 mb-6">
                     {project.description}
+                    {project.link && (
+                      <>
+                        <br />
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                          {language === 'fr' ? 'En savoir plus' : 'Learn more'}
+                        </a>
+                      </>
+                    )}
                   </p>
 
                   {/* Statistiques */}
