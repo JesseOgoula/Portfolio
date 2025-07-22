@@ -19,7 +19,7 @@ const translations: Translations = {
   
   // Hero Section
   'hero.title': { fr: 'Je transforme vos idées en produits qui croissent', en: 'I transform your ideas into growing products' },
-  'hero.subtitle': { fr: 'Product & Growth Manager francophone spécialisé dans l\'accompagnement des entreprises vers leur transformation digitale', en: 'Francophone Product & Growth Manager specialized in supporting companies through their digital transformation' },
+  'hero.subtitle': { fr: 'Product & Growth Manager spécialisé dans l\'accompagnement des entreprises vers leur transformation digitale', en: 'Product & Growth Manager specialized in supporting companies through their digital transformation' },
   'hero.cta': { fr: 'Réserver un call', en: 'Book a call' },
   'hero.stats.projects': { fr: 'projets réalisés', en: 'completed projects' },
   'hero.stats.growth': { fr: 'croissance moyenne', en: 'average growth' },
@@ -30,8 +30,8 @@ const translations: Translations = {
   'about.title': { fr: 'À propos', en: 'About Me' },
   'about.subtitle': { fr: 'Mon parcours et ma vision', en: 'My journey and vision' },
   'about.description': { 
-    fr: 'Je suis Adirigno Ogoula Jesse Daïse, Product & Growth Manager et Coach formateur certifié, avec un parcours marqué par une transition réussie de la logistique vers le numérique. Depuis 2020, j\'accompagne des entreprises et des apprenants dans la transformation digitale, le développement de produits innovants et la mise en place de stratégies marketing performantes. Fort de plus de 20 projets réalisés, d\'une expérience en tutorat pour l\'OIF (programme D-CLIC) et de plus de 100 jeunes formés au marketing digital via École 241, je crois en un numérique francophone inclusif, axé sur les compétences, l\'impact et l\'autonomie. Ma vision : allier technologie, pédagogie active et culture du résultat pour former et faire croître des talents prêts à relever les défis de demain.',
-    en: 'I am Adirigno Ogoula Jesse Daïse, a certified Product & Growth Manager and Training Coach, with a journey marked by a successful transition from logistics to digital. Since 2020, I have been supporting companies and learners in digital transformation, innovative product development, and implementing effective marketing strategies. With over 20 completed projects, tutoring experience for OIF (D-CLIC program), and more than 100 young people trained in digital marketing through École 241, I believe in inclusive French-speaking digital technology focused on skills, impact, and autonomy. My vision: combining technology, active pedagogy, and results-driven culture to train and grow talents ready to meet tomorrow\'s challenges.'
+    fr: 'Je suis Adirigno Ogoula Jesse Daïse, Product & Growth Manager et Coach formateur certifié, avec un parcours marqué par une transition réussie de la logistique vers le numérique. Depuis 2020, j\'accompagne des entreprises et des apprenants dans la transformation digitale, le développement de produits innovants et la mise en place de stratégies marketing performantes. Fort de plus de 20 projets réalisés, d\'une expérience en tutorat pour l\'OIF (programme D-CLIC) et de plus de 100 jeunes formés au marketing digital via École 241, je crois en un numérique inclusif, axé sur les compétences, l\'impact et l\'autonomie. Ma vision : allier technologie, pédagogie active et culture du résultat pour former et faire croître des talents prêts à relever les défis de demain.',
+    en: 'I am Adirigno Ogoula Jesse Daïse, a certified Product & Growth Manager and Training Coach, with a journey marked by a successful transition from logistics to digital. Since 2020, I have been supporting companies and learners in digital transformation, innovative product development, and implementing effective marketing strategies. With over 20 completed projects, tutoring experience for OIF (D-CLIC program), and more than 100 young people trained in digital marketing through École 241, I believe in inclusive digital technology focused on skills, impact, and autonomy. My vision: combining technology, active pedagogy, and results-driven culture to train and grow talents ready to meet tomorrow\'s challenges.'
   },
   
   // Partners Section
@@ -58,7 +58,7 @@ const translations: Translations = {
   'certifications.verify': { fr: 'Vérifier', en: 'Verify' },
   
   // Footer
-  'footer.description': { fr: 'Product & Growth Manager francophone spécialisé dans l\'accompagnement des entreprises vers leur transformation digitale.', en: 'Francophone Product & Growth Manager specialized in supporting companies through their digital transformation.' },
+  'footer.description': { fr: 'Product & Growth Manager spécialisé dans l\'accompagnement des entreprises vers leur transformation digitale.', en: 'Product & Growth Manager specialized in supporting companies through their digital transformation.' },
   'footer.services': { fr: 'Services', en: 'Services' },
   'footer.resources': { fr: 'Ressources', en: 'Resources' },
   'footer.contact': { fr: 'Contact', en: 'Contact' },

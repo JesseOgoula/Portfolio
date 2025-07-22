@@ -7,7 +7,7 @@ const Contact = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
   
-  const contactEmail = "contact@portfolio.fr";
+  const contactEmail = "contact@ogoulajesse.pro";
 
   return (
     <section id="contact" className="py-20 bg-light-100 relative overflow-hidden">

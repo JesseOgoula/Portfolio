@@ -9,31 +9,14 @@ const Testimonials = () => {
   
   const testimonials = [
     {
-      name: 'Sylvère Boussamba',
-      role: language === 'fr' ? 'CEO, École 241' : 'CEO, École 241',
-      content: language === 'fr' 
-        ? 'Un accompagnement exceptionnel qui a transformé notre approche produit. Les résultats ont dépassé nos attentes avec une augmentation de 200% de l\'engagement étudiant.'
-        : 'Exceptional support that transformed our product approach. Results exceeded our expectations with a 200% increase in student engagement.',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
-    },
-    {
-      name: 'Marie Nkongolo',
-      role: language === 'fr' ? 'Directrice Marketing, Africakard' : 'Marketing Director, Africakard',
+      name: 'Nel Brunel Mankou Madouma',
+      role: language === 'fr' ? 'Web Designer | UI-UX Designer' : 'Web Designer | UI-UX Designer',
       content: language === 'fr'
-        ? 'Son expertise en Product Management nous a permis de structurer notre roadmap et d\'atteindre nos objectifs de croissance en un temps record.'
-        : 'His Product Management expertise allowed us to structure our roadmap and achieve our growth objectives in record time.',
+        ? 'Grâce à la formation à École 241, j’ai eu l’opportunité de rencontrer le coach Jesse. Son accompagnement m’a permis de structurer mes compétences existantes et d’en développer de nouvelles. Aujourd’hui encore, j’apprends à ses côtés. Sa passion pour l’apprentissage et sa veille constante lui permettent de toujours progresser et de nous inspirer à faire de même.'
+        : 'Thanks to the training at École 241, I had the opportunity to meet coach Jesse. His support helped me structure my existing skills and develop new ones. Even today, I continue to learn alongside him. His passion for learning and constant curiosity allow him to keep progressing and inspire us to do the same.' ,
       rating: 5,
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b932?auto=format&fit=crop&w=150&q=80'
-    },
-    {
-      name: 'Jean-Claude Mvondo',
-      role: language === 'fr' ? 'Entrepreneur, Fintech' : 'Entrepreneur, Fintech',
-      content: language === 'fr'
-        ? 'Formation D-CLIC exceptionnelle ! J\'ai acquis les compétences nécessaires pour lancer ma startup avec une stratégie marketing solide.'
-        : 'Exceptional D-CLIC training! I acquired the skills needed to launch my startup with a solid marketing strategy.',
-      rating: 5,
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80'
+      image: '/NEL.jpg',
+      linkedin: 'https://www.linkedin.com/in/nel-brunel-mankou-madouma/'
     }
   ];
 
@@ -86,7 +69,13 @@ const Testimonials = () => {
                 
                 <div>
                   <div className="font-poppins font-semibold text-lg text-navy-800">
-                    {testimonials[currentIndex].name}
+                    {testimonials[currentIndex].linkedin ? (
+                      <a href={testimonials[currentIndex].linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline text-primary">
+                        {testimonials[currentIndex].name}
+                      </a>
+                    ) : (
+                      testimonials[currentIndex].name
+                    )}
                   </div>
                   <div className="font-inter text-primary">
                     {testimonials[currentIndex].role}

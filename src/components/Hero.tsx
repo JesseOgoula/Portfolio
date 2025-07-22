@@ -64,11 +64,11 @@ const Hero = () => {
 
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button 
-                  onClick={scrollToContact}
+                <Button
+                  asChild
                   className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
                 >
-                  {t('hero.cta')}
+                  <a href="/schedule">{t('hero.cta')}</a>
                 </Button>
                 <Button 
                   variant="outline"

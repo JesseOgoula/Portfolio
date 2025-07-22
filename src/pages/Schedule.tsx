@@ -10,6 +10,14 @@ const Schedule = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Redirige vers la section demandée si hash présent
+    if (window.location.hash) {
+      const section = window.location.hash.replace('#', '');
+      if (section) {
+        window.location.href = `/${window.location.hash}`;
+      }
+    }
+
     // Make sure Calendly script is loaded
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';

@@ -68,14 +68,7 @@ const Certifications = () => {
                         {cert.description}
                       </p>
                     </div>
-                    <div className="mt-4 md:mt-0 md:ml-6">
-                      <a 
-                        href={cert.link}
-                        className="inline-block bg-primary/10 text-primary px-4 py-2 rounded-lg font-inter text-sm font-medium hover:bg-primary hover:text-white transition-colors duration-200"
-                      >
-                        {t('certifications.verify')}
-                      </a>
-                    </div>
+                    {/* Bouton 'Vérifier' supprimé */}
                   </div>
                 </div>
               ))}
