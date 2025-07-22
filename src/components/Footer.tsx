@@ -34,6 +34,8 @@ const Footer = () => {
                 src="/logored.png" 
                 alt="Ogoula Jesse Logo" 
                 className="h-12 w-auto brightness-0 invert transition-transform duration-300 hover:scale-105"
+                loading="lazy"
+                width="48"
               />
             </div>
             <p className="font-inter text-gray-300 leading-relaxed mb-6">

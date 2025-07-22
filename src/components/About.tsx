@@ -1,11 +1,12 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const About = () => {
   const { t, language } = useLanguage();
   const [isExpanded, setIsExpanded] = useState(false);
+  const descRef = useRef<HTMLSpanElement>(null);
 
   const description = t('about.description');
   const halfLength = Math.floor(description.length / 2);
@@ -33,9 +34,15 @@ const About = () => {
             <div className="relative">
               <p className="font-inter text-white leading-relaxed text-lg text-center max-w-3xl mx-auto">
                 {/* Sur desktop ou lorsque le texte est développé, afficher tout le texte */}
-                <span className="hidden lg:block">{description}</span>
+                <span className="hidden lg:block" id="about-desc-full">
+                  {description}
+                </span>
                 {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
-                <span className="block lg:hidden max-w-full">
+                <span
+                  className="block lg:hidden max-w-full"
+                  id="about-desc-mobile"
+                  ref={descRef}
+                >
                   {isExpanded ? description : truncatedDescription}
                 </span>
               </p>
@@ -44,8 +51,17 @@ const About = () => {
               <div className="mt-4 text-center block lg:hidden">
                 <Button
                   variant="ghost"
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  className="text-white hover:text-primary transition-colors"
+                  onClick={() => {
+                    setIsExpanded(!isExpanded);
+                    setTimeout(() => {
+                      if (!isExpanded && descRef.current) {
+                        descRef.current.focus();
+                      }
+                    }, 100);
+                  }}
+                  className="text-white hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-primary"
+                  aria-expanded={isExpanded}
+                  aria-controls="about-desc-mobile"
                 >
                   {isExpanded ? (
                     <>
@@ -68,4 +84,6 @@ const About = () => {
   );
 };
 
+// Préparation pour lazy loading
 export default About;
+// export default React.lazy(() => import('./About')); // à utiliser dans App.tsx si besoin

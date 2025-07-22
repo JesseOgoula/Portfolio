@@ -44,6 +44,8 @@ const Navigation = () => {
               src="/Favicon.png" 
               alt="Ogoula Jesse Logo" 
               className="h-8 w-auto transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+              width="32"
             />
           </div>
           
