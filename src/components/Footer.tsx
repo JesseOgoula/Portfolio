@@ -95,7 +95,7 @@ const Footer = () => {
           <div>
             <h4 className="font-poppins font-semibold text-lg mb-6">{t('footer.contact')}</h4>
             <div className="space-y-3 font-inter text-gray-300">
-              <p>contact@ogoulajesse.com</p>
+              <p>contact@ogoulajesse.pro</p>
               <p>+241 066 19 57 86</p>
               <p>Libreville, Gabon</p>
             </div>
