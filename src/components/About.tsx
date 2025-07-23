@@ -39,7 +39,7 @@ const About = () => {
                 </span>
                 {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
                 <span
-                  className="block lg:hidden max-w-full"
+                  className="block lg:hidden max-w-full text-justify"
                   id="about-desc-mobile"
                   ref={descRef}
                 >

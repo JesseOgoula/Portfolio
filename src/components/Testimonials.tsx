@@ -48,27 +48,27 @@ const Testimonials = () => {
 
         <div className="max-w-4xl mx-auto relative">
           <Card className="border-0 shadow-2xl">
-            <CardContent className="p-12">
+            <CardContent className="p-6 sm:p-12">
               <div className="text-center">
                 <div className="mb-8">
                   <img
                     src={testimonials[currentIndex].image}
                     alt={testimonials[currentIndex].name}
-                    className="w-20 h-20 rounded-full mx-auto mb-6 object-cover"
+                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-full mx-auto mb-4 object-cover border-4 border-primary/20"
                   />
-                  <div className="flex justify-center mb-6">
+                  <div className="flex justify-center mb-4">
                     {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-2xl">★</span>
+                      <span key={i} className="text-yellow-400 text-2xl sm:text-3xl">★</span>
                     ))}
                   </div>
                 </div>
                 
-                <blockquote className="font-inter text-xl text-gray-700 leading-relaxed mb-8 italic">
+                <blockquote className="font-inter text-base sm:text-lg text-gray-700 leading-relaxed mb-8 italic text-justify sm:text-center">
                   "{testimonials[currentIndex].content}"
                 </blockquote>
                 
                 <div>
-                  <div className="font-poppins font-semibold text-lg text-navy-800">
+                  <div className="font-poppins font-semibold text-base sm:text-lg text-navy-800">
                     {testimonials[currentIndex].linkedin ? (
                       <a href={testimonials[currentIndex].linkedin} target="_blank" rel="noopener noreferrer" className="hover:underline text-primary">
                         {testimonials[currentIndex].name}
@@ -77,7 +77,7 @@ const Testimonials = () => {
                       testimonials[currentIndex].name
                     )}
                   </div>
-                  <div className="font-inter text-primary">
+                  <div className="font-inter text-primary text-sm sm:text-base">
                     {testimonials[currentIndex].role}
                   </div>
                 </div>

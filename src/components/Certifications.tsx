@@ -100,7 +100,7 @@ const Certifications = () => {
           <div className="bg-navy-800 p-8 rounded-2xl">
             <div className="max-w-3xl mx-auto">
               <p className="font-inter text-gray-300 leading-relaxed text-center italic">
-                {aspirationText}
+                <span className="block sm:inline text-justify sm:text-center">{aspirationText}</span>
               </p>
             </div>
           </div>
