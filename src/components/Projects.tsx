@@ -70,8 +70,8 @@ const Projects = () => {
       category: language === 'fr' ? 'Plateforme pédagogique' : 'Learning Platform',
       duration: language === 'fr' ? '6 mois' : '6 months',
       description: language === 'fr'
-        ? "Dans le cadre de ma mission à École 241 (Ogooue Labs), j'ai conçu CodeSchool : une plateforme pédagogique pensée pour centraliser nos activités et mieux accompagner les apprenants. J'ai assuré la conception produit (product management, design, fonctionnalités) tandis que le développement technique a été réalisé par mon collègue Yohann Obiang.\nContact : contact@ogoulajesse.pro\nPour en savoir plus :"
-        : "As part of my mission at École 241 (Ogooue Labs), I designed CodeSchool: a learning platform created to centralize our activities and better support learners. I was responsible for product conception (product management, design, features) while the technical development was carried out by my colleague Yohann Obiang.\nContact: contact@ogoulajesse.pro\nLearn more:",
+        ? "Dans le cadre de ma mission à École 241 (Ogooue Labs), j'ai conçu CodeSchool : une plateforme pédagogique pensée pour centraliser nos activités et mieux accompagner les apprenants. J'ai assuré la conception produit (product management, design, fonctionnalités) tandis que le développement technique a été réalisé par mon collègue Yohann Obiang."
+        : "As part of my mission at École 241 (Ogooue Labs), I designed CodeSchool: a learning platform created to centralize our activities and better support learners. I was responsible for product conception (product management, design, features) while the technical development was carried out by my colleague Yohann Obiang.",
       logo: '/logos/E241 NOIR.png',
       banner: '/code school.jpg',
       link: 'https://www.yohannobiang.com/codeschool.html',

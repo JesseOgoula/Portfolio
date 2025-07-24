@@ -105,7 +105,9 @@ const Footer = () => {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row md:justify-center items-center">
           <div className="font-inter text-gray-400">
-            © {currentYear} Ogoula Jesse. {t('footer.rights')}
+            © {currentYear}
+            <span className="inline-block mr-2"></span>
+            <a href="https://www.ibogalab.tech/" target="_blank" rel="noopener noreferrer" className="hover:underline text-primary font-semibold">Iboga Lab</a>. {t('footer.rights')}
           </div>
         </div>
       </div>

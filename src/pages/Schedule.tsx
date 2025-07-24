@@ -73,10 +73,13 @@ const Schedule = () => {
           {/* Calendly widget container */}
           <div className="flex-1 bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-2 sm:p-4 lg:p-8">
             <div className="w-full h-full">
-              <div 
+              {/* Début de widget en ligne Calendly */}
+              <div
                 className="calendly-inline-widget w-full"
-                data-url="https://calendly.com/jesseogoula"
-              />
+                data-url="https://calendly.com/jesseogoula/appel-de-decouverte"
+                style={{ minWidth: '320px', height: '700px' }}
+              ></div>
+              {/* Fin de widget en ligne Calendly */}
             </div>
           </div>
         </div>

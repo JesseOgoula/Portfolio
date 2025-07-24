@@ -46,7 +46,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto relative">
+        <div className="max-w-4xl mx-auto relative px-[10px]">
           <Card className="border-0 shadow-2xl">
             <CardContent className="p-6 sm:p-12">
               <div className="text-center">
@@ -86,19 +86,37 @@ const Testimonials = () => {
           </Card>
 
           {/* Navigation */}
-          <button
-            onClick={prevTestimonial}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors duration-200"
-          >
-            <ChevronLeft className="w-6 h-6 text-navy-800" />
-          </button>
-          
-          <button
-            onClick={nextTestimonial}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors duration-200"
-          >
-            <ChevronRight className="w-6 h-6 text-navy-800" />
-          </button>
+          {/* Desktop: boutons latéraux, Mobile: boutons centrés sous la carte */}
+          <div className="hidden sm:block">
+            <button
+              onClick={prevTestimonial}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors duration-200"
+            >
+              <ChevronLeft className="w-6 h-6 text-navy-800" />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors duration-200"
+            >
+              <ChevronRight className="w-6 h-6 text-navy-800" />
+            </button>
+          </div>
+          <div className="flex sm:hidden justify-center gap-6 mt-6">
+            <button
+              onClick={prevTestimonial}
+              className="bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors duration-200"
+              aria-label="Précédent"
+            >
+              <ChevronLeft className="w-6 h-6 text-navy-800" />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              className="bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors duration-200"
+              aria-label="Suivant"
+            >
+              <ChevronRight className="w-6 h-6 text-navy-800" />
+            </button>
+          </div>
 
           {/* Dots */}
           <div className="flex justify-center mt-8 space-x-2">
