@@ -23,12 +23,11 @@ const Hero = () => {
 
   return (
     <>
-      <section id="accueil" className="min-h-screen flex items-center bg-gradient-to-br from-light-100 to-white relative overflow-hidden">
+  <section id="accueil" className="min-h-screen flex items-center bg-gradient-to-br from-light-100 to-white relative overflow-hidden pt-8 sm:pt-4 mt-16 sm:mt-4">
         {/* Background decoration */}
         <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-navy-800/5 rounded-full blur-3xl" />
-        
-  <div className="container mx-auto px-4 lg:px-8 pt-0 sm:pt-0 lg:pt-0 pb-12">
+        <div className="container mx-auto px-4 lg:px-8 pt-0 sm:pt-0 lg:pt-0 pb-12">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Content */}
             <div className="animate-fade-in text-center lg:text-left">
@@ -43,29 +42,29 @@ const Hero = () => {
                   {t('hero.subtitle')}
                 </p>
               </div>
-
               {/* Stats */}
-              <div className="grid grid-cols-3 gap-4 sm:gap-8 mb-8">
-                {stats.map((stat, index) => (
-                  <div key={index} className="text-center">
-                    <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-navy-800 mb-1">
-                      <AnimatedCounter 
-                        target={stat.number} 
-                        suffix={stat.suffix}
-                        duration={2000}
-                      />
+              <div className="flex flex-col items-center mb-8">
+                <div className="flex w-full justify-center gap-6 mb-2">
+                  {stats.map((stat, index) => (
+                    <div key={index} className="text-center min-w-[70px]">
+                      <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-navy-800 mb-1">
+                        <AnimatedCounter 
+                          target={stat.number} 
+                          suffix={stat.suffix}
+                          duration={2000}
+                        />
+                      </div>
+                      <div className="font-inter text-xs sm:text-sm text-gray-600">
+                        {stat.label}
+                      </div>
                     </div>
-                    <div className="font-inter text-xs sm:text-sm text-gray-600">
-                      {stat.label}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start w-full max-w-xs mx-auto mb-2">
                 <Button
-                  className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                  className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-8 py-3 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full"
                   onClick={() => window.location.href = '/schedule'}
                 >
                   {t('hero.cta')}
@@ -73,20 +72,20 @@ const Hero = () => {
                 <Button 
                   variant="outline"
                   onClick={() => setIsCVModalOpen(true)}
-                  className="border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white px-6 sm:px-8 py-4 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200"
+                  className="border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white px-4 sm:px-8 py-3 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 w-full"
                 >
                   {t('hero.download.cv')}
                 </Button>
               </div>
             </div>
-
             {/* Image */}
-            <div className="relative animate-scale-in">
+            <div className="relative animate-scale-in mt-6 sm:mt-0">
               <div className="relative z-10">
                 <img
                   src="/mee.png"
                   alt="Product & Growth Manager"
                   className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
+                  style={{ marginTop: '10px' }}
                 />
               </div>
               {/* Decorative elements */}
@@ -95,19 +94,17 @@ const Hero = () => {
             </div>
           </div>
         </div>
-
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <ArrowDown className="w-6 h-6 text-gray-400" />
         </div>
       </section>
-
       <CVDownloadModal 
         isOpen={isCVModalOpen} 
         onClose={() => setIsCVModalOpen(false)} 
       />
     </>
   );
-};
+}
 
 export default Hero;
