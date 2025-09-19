@@ -9,6 +9,18 @@ const About = () => {
   const descRef = useRef<HTMLSpanElement>(null);
 
   const description = t('about.description');
+
+  // Fonction utilitaire pour colorer les mots-clés
+  function highlightKeywords(text: string) {
+    // Couleur rouge personnalisée
+    const color = 'rgb(230 57 70 / var(--tw-bg-opacity, 1))';
+    // Regex pour trouver les mots-clés (français et anglais)
+    return text
+      .replace(/(Mes expertises ?[:：]?)/gi, `<span style="color:${color};font-weight:bold;">$1</span>`)
+      .replace(/(Ma mission ?[:：]?)/gi, `<span style="color:${color};font-weight:bold;">$1</span>`)
+      .replace(/(My expertise ?[:：]?)/gi, `<span style="color:${color};font-weight:bold;">$1</span>`)
+      .replace(/(My mission ?[:：]?)/gi, `<span style="color:${color};font-weight:bold;">$1</span>`);
+  }
   const halfLength = Math.floor(description.length / 2);
   const truncatedDescription = description.slice(0, halfLength) + '...';
 
@@ -34,17 +46,18 @@ const About = () => {
             <div className="relative">
               <p className="font-inter text-white leading-relaxed text-lg text-center max-w-3xl mx-auto">
                 {/* Sur desktop ou lorsque le texte est développé, afficher tout le texte */}
-                <span className="hidden lg:block" id="about-desc-full">
-                  {description}
-                </span>
+                <span
+                  className="hidden lg:block"
+                  id="about-desc-full"
+                  dangerouslySetInnerHTML={{ __html: highlightKeywords(description) }}
+                />
                 {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
                 <span
                   className="block lg:hidden max-w-full text-justify"
                   id="about-desc-mobile"
                   ref={descRef}
-                >
-                  {isExpanded ? description : truncatedDescription}
-                </span>
+                  dangerouslySetInnerHTML={{ __html: highlightKeywords(isExpanded ? description : truncatedDescription) }}
+                />
               </p>
 
               {/* Bouton "voir plus" uniquement sur mobile */}

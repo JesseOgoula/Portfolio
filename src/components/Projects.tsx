@@ -38,7 +38,7 @@ const Projects = () => {
     {
       title: 'OIF D-CLIC',
       category: language === 'fr' ? 'Formation' : 'Training',
-      duration: language === 'fr' ? '2 mois' : '2 months',
+      duration: language === 'fr' ? '5 mois' : '5 months',
       description: language === 'fr'
         ? 'Le programme D-CLIC  est une initiative de l’Organisation internationale de la Francophonie (OIF) visant à renforcer les compétences numériques des jeunes francophones. L\'objectif est de favoriser leur employabilité et leur autonomisation dans des secteurs porteurs du numérique.'
         : 'The D-CLIC programme is an initiative of the Organisation internationale de la Francophonie (OIF) aimed at strengthening the digital skills of young Francophones. The aim is to promote their employability and empowerment in promising digital sectors.',

@@ -1,7 +1,8 @@
-
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
@@ -19,20 +20,7 @@ const Services = () => {
         language === 'fr' ? 'Optimisation conversion' : 'Conversion optimization',
         language === 'fr' ? 'Tableaux de bord & analytics avancés' : 'Dashboards & advanced analytics'
       ],
-     
       color: 'bg-primary'
-    },
-    {
-      title: t('services.coaching.title'),
-      description: t('services.coaching.description'),
-      features: [
-        language === 'fr' ? 'Mentoring 1:1' : '1:1 Mentoring',
-        language === 'fr' ? 'Introduction au Product Management' : 'Introduction to Product Management',
-        language === 'fr' ? 'Conseils sur les parcours de formation certifiante' : 'Certification path guidance',
-        language === 'fr' ? 'Suivi dans la mise en application des concepts produits' : 'Monitoring the implementation of product concepts'
-      ],
-      
-      color: 'bg-navy-800'
     },
     {
       title: t('services.formation.title'),
@@ -43,8 +31,22 @@ const Services = () => {
         language === 'fr' ? 'Suivi personnalisé' : 'Personalized follow-up',
         language === 'fr' ? 'Initiation à l’IA pour les pros (ChatGPT, outils no-code, automatisation)' : 'Introduction to AI for Professionals (ChatGPT, no-code tools, automation)'
       ],
-      
       color: 'bg-gradient-to-r from-primary to-navy-800'
+    }
+  ];
+
+  const [open, setOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+
+  // Détail complet pour chaque service (traduction via t)
+  const serviceDetails = [
+    {
+      title: t('services.consulting.title'),
+      description: t('services.consulting.fullDescription'),
+    },
+    {
+      title: t('services.formation.title'),
+      description: t('services.formation.fullDescription'),
     }
   ];
 
@@ -61,7 +63,7 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto justify-center">
           {services.map((service, index) => (
             <Card key={index} className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-0 overflow-hidden">
               <div className={`h-2 ${service.color}`} />
@@ -72,7 +74,6 @@ const Services = () => {
                 <p className="font-inter text-sm sm:text-base text-gray-600 mb-6 leading-relaxed">
                   {service.description}
                 </p>
-                
                 <ul className="space-y-3 mb-8">
                   {service.features.map((feature, idx) => (
                     <li key={idx} className="flex items-center font-inter text-gray-700">
@@ -82,10 +83,13 @@ const Services = () => {
                   ))}
                 </ul>
 
-                <div className="border-t pt-6">
-                  <Button 
+                <div className="border-t pt-6 flex gap-2">
+                  <Button
                     className="w-full bg-primary hover:bg-primary/90 text-white font-inter font-medium transition-all duration-200 hover:scale-105"
-                    onClick={() => navigate('/schedule')}
+                    onClick={() => {
+                      setSelectedService(serviceDetails[index]);
+                      setOpen(true);
+                    }}
                   >
                     {t('services.cta.main')}
                   </Button>
@@ -94,6 +98,26 @@ const Services = () => {
             </Card>
           ))}
         </div>
+
+        {/* Dialog pop-up */}
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>{selectedService?.title}</DialogTitle>
+            </DialogHeader>
+            <DialogDescription>
+              {selectedService?.description}
+            </DialogDescription>
+            <DialogFooter>
+              <Button
+                className="w-full bg-primary hover:bg-primary/90 text-white font-inter font-medium mt-4"
+                onClick={() => { setOpen(false); navigate('/schedule'); }}
+              >
+                {language === 'fr' ? 'Réserver un call' : 'Book a call'}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </section>
   );

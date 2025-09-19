@@ -23,7 +23,6 @@ const Navigation = () => {
   const navLinks = [
     { id: 'accueil', label: t('nav.home') },
     { id: 'a-propos', label: t('nav.about') },
-    { id: 'services', label: t('nav.services') },
     { id: 'realisations', label: t('nav.portfolio') },
     { id: 'contact', label: t('nav.contact') }
   ];

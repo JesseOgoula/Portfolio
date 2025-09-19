@@ -25,7 +25,7 @@ const Certifications = () => {
     {
       title: language === 'fr' ? 'Tuteur D-CLIC (OIF)' : 'D-CLIC Tutor (OIF)',
       organization: language === 'fr' ? 'Organisation Internationale de la Francophonie' : 'International Organization of Francophonie',
-      year: '2023',
+      year: '2025',
       description: language === 'fr'
         ? 'Certification de tuteur pour le dispositif D-CLIC de formation au marketing numérique.'
         : 'Tutor certification for the D-CLIC digital marketing training program.',
@@ -34,7 +34,7 @@ const Certifications = () => {
   ];
 
   const aspirationText = language === 'fr' 
-    ? "En tant que professionnel du numérique en constante évolution, je m'efforce chaque jour de perfectionner mes compétences et d'élargir mon expertise. Mon engagement dans l'accompagnement des apprenants et le soutien aux entreprises dans leur transformation digitale témoigne de ma volonté d'avoir un impact positif dans l'écosystème numérique francophone. Je continue à travailler avec passion et détermination, en espérant que mon expertise et mon dévouement contribueront à façonner l'avenir numérique de notre communauté."
+    ? "En tant que professionnel du numérique, je m'efforce chaque jour de perfectionner mes compétences et d'élargir mon expertise. Mon engagement dans l'accompagnement des apprenants et le soutien aux entreprises dans leur transformation digitale témoigne de ma volonté d'avoir un impact positif dans l'écosystème numérique francophone. Je continue à travailler avec passion et détermination, en espérant que mon expertise et mon dévouement contribueront à façonner l'avenir numérique de notre communauté."
     : "As a constantly evolving digital professional, I strive every day to perfect my skills and broaden my expertise. My commitment to supporting learners and assisting businesses in their digital transformation demonstrates my desire to have a positive impact in the French-speaking digital ecosystem. I continue to work with passion and determination, hoping that my expertise and dedication will help shape the digital future of our community.";
 
   return (

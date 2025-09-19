@@ -7,9 +7,8 @@ const Footer = () => {
 
   const footerLinks = {
     services: [
-      { name: t('services.consulting.title'), href: '#services' },
-      { name: t('services.coaching.title'), href: '#services' },
-      { name: t('services.formation.title'), href: '#services' }
+  { name: t('services.consulting.title'), href: '#services' },
+  { name: t('services.formation.title'), href: '#services' }
     ],
     ressources: [
       { name: language === 'fr' ? 'Certifications' : 'Certifications', href: '#certifications' },

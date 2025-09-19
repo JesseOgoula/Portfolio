@@ -16,9 +16,9 @@ const Hero = () => {
   };
 
   const stats = [
-    { number: 20, suffix: '+', label: t('hero.stats.projects') },
-    { number: 35, suffix: '%', label: t('hero.stats.growth') },
-    { number: 100, suffix: '+', label: t('hero.stats.students') }
+  { number: 20, suffix: '+', label: t('hero.stats.projects') },
+  { number: 35, suffix: '%', label: t('hero.stats.growth') },
+  { number: 200, suffix: '+', label: t('hero.stats.students') }
   ];
 
   return (
@@ -28,13 +28,13 @@ const Hero = () => {
         <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-navy-800/5 rounded-full blur-3xl" />
         
-        <div className="container mx-auto px-4 lg:px-8 pt-24 sm:pt-28 lg:pt-20 pb-12">
+  <div className="container mx-auto px-4 lg:px-8 pt-0 sm:pt-0 lg:pt-0 pb-12">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             {/* Content */}
             <div className="animate-fade-in text-center lg:text-left">
               <div className="mb-6">
                 <span className="inline-block bg-primary/10 text-primary px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-inter font-medium mb-4">
-                  Product & Growth Manager
+                  {t('hero.role')}
                 </span>
                 <h1 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-navy-800 leading-tight mb-4 sm:mb-6">
                   {t('hero.title')}
@@ -65,10 +65,10 @@ const Hero = () => {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button
-                  asChild
                   className="bg-primary hover:bg-primary/90 text-white px-6 sm:px-8 py-4 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg"
+                  onClick={() => window.location.href = '/schedule'}
                 >
-                  <a href="/schedule">{t('hero.cta')}</a>
+                  {t('hero.cta')}
                 </Button>
                 <Button 
                   variant="outline"
@@ -84,7 +84,7 @@ const Hero = () => {
             <div className="relative animate-scale-in">
               <div className="relative z-10">
                 <img
-                  src="/moi.png"
+                  src="/mee.png"
                   alt="Product & Growth Manager"
                   className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
                 />
