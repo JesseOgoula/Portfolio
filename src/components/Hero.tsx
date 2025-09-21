@@ -1,5 +1,6 @@
+
 import { Button } from '@/components/ui/button';
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Phone, Download, BadgeCheck } from 'lucide-react';
 import AnimatedCounter from '@/components/AnimatedCounter';
 import CVDownloadModal from '@/components/CVDownloadModal';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -22,52 +23,33 @@ const Hero = () => {
 
   return (
     <>
-  <section
-    id="accueil"
-    className="min-h-[70vh] sm:min-h-[80vh] flex items-center bg-gradient-to-br from-light-100 to-white relative overflow-hidden pt-2 sm:pt-2 mt-6 sm:mt-2"
-  >
-        {/* Background decoration */}
-        <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-48 h-48 bg-navy-800/5 rounded-full blur-3xl" />
-        <div className="container mx-auto px-4 lg:px-8 pt-0 sm:pt-0 lg:pt-0 pb-12">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+      <section
+        id="accueil"
+        className="relative min-h-[80vh] flex items-center bg-gradient-to-br from-light-100 to-white overflow-hidden pt-8 pb-8 lg:pt-16 lg:pb-16 mt-16"
+      >
+        {/* Background */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <div className="absolute top-16 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-10 left-10 w-56 h-56 bg-navy-800/10 rounded-full blur-3xl" />
+        </div>
+        <div className="container mx-auto px-4 lg:px-8 z-10">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             {/* Content */}
-            <div className="animate-fade-in text-center lg:text-left">
-              <div className="mb-6">
-                <span className="inline-block bg-primary/10 text-primary px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-inter font-medium mb-4">
-                  {t('hero.role')}
-                </span>
-                <h1 className="font-poppins font-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-navy-800 leading-tight mb-4 sm:mb-6">
-                  {t('hero.title')}
-                </h1>
-                <p className="font-inter text-base sm:text-lg text-gray-600 leading-relaxed mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0">
-                  {t('hero.subtitle')}
-                </p>
-              </div>
-              {/* Stats */}
-              <div className="flex flex-col items-center lg:items-start mb-8">
-                <div className="flex w-full justify-center lg:justify-start gap-6 mb-2">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center min-w-[70px]">
-                      <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-navy-800 mb-1">
-                        <AnimatedCounter 
-                          target={stat.number} 
-                          suffix={stat.suffix}
-                          duration={2000}
-                        />
-                      </div>
-                      <div className="font-inter text-xs sm:text-sm text-gray-600">
-                        {stat.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start w-full max-w-xs mb-2">
+            <div className="text-center lg:text-left flex flex-col justify-center animate-fade-in">
+              <span className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-inter font-semibold mb-4 mx-auto lg:mx-0 max-w-[300px] truncate">
+                {t('hero.role')}
+              </span>
+              <h1 className="font-poppins font-extrabold text-4xl sm:text-5xl lg:text-6xl text-navy-900 leading-tight mb-4 tracking-tight">
+                {t('hero.title')}
+              </h1>
+              <p className="font-inter text-lg sm:text-xl text-gray-700 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+                {t('hero.subtitle')}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start w-full max-w-md mx-auto lg:mx-0 mb-8">
                 <Button
                   variant="default"
-                  className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-8 py-3 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full focus:outline-none focus:ring-2 focus:ring-primary"
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white font-inter font-semibold text-lg px-8 py-4 rounded-xl shadow-lg flex items-center gap-2 transition-all duration-200 hover:scale-105"
                   onClick={() => {
                     window.open('https://calendly.com/jesseogoula/appel-de-decouverte', '_blank');
                   }}
@@ -75,36 +57,55 @@ const Hero = () => {
                   type="button"
                   aria-label={t('hero.cta')}
                 >
+                  <Phone className="w-5 h-5" />
                   {t('hero.cta')}
                 </Button>
-                <Button 
+                <Button
                   variant="outline"
+                  size="lg"
                   onClick={() => setIsCVModalOpen(true)}
-                  className="border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white px-4 sm:px-8 py-3 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 w-full"
+                  className="border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white font-inter font-semibold text-lg px-8 py-4 rounded-xl flex items-center gap-2 transition-all duration-200"
                 >
+                  <Download className="w-5 h-5" />
                   {t('hero.download.cv')}
                 </Button>
               </div>
             </div>
             {/* Image */}
-            <div className="relative animate-scale-in mt-6 sm:mt-0">
+            <div className="relative flex justify-center items-center animate-scale-in mt-8 lg:mt-0">
               <div className="relative z-10">
                 <img
                   src="/mee.png"
                   alt="Product & Growth Manager"
-                  className="w-full max-w-md mx-auto rounded-2xl shadow-2xl"
-                  style={{ marginTop: '10px' }}
+                  className="w-72 h-96 sm:w-96 sm:h-[28rem] object-cover rounded-3xl shadow-2xl border-4 border-white mx-auto"
+                  style={{ objectPosition: 'top' }}
                 />
               </div>
-              {/* Decorative elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl" />
-              <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-navy-800/10 rounded-full blur-xl" />
+            </div>
+          </div>
+          {/* Stats Bar */}
+          <div className="relative flex justify-center mt-8 z-20">
+            <div className="w-full max-w-3xl bg-white/90 backdrop-blur-md rounded-2xl shadow-lg flex flex-row flex-wrap justify-center gap-8 py-4 px-6 border border-gray-200">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center min-w-[80px]">
+                  <div className="font-poppins font-bold text-2xl sm:text-3xl text-navy-900 mb-1">
+                    <AnimatedCounter 
+                      target={stat.number} 
+                      suffix={stat.suffix}
+                      duration={2000}
+                    />
+                  </div>
+                  <div className="font-inter text-xs sm:text-sm text-gray-700">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ArrowDown className="w-6 h-6 text-gray-400" />
+        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 animate-bounce z-30">
+          <ArrowDown className="w-7 h-7 text-gray-400" />
         </div>
       </section>
       <CVDownloadModal 
