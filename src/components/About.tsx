@@ -31,63 +31,75 @@ const About = () => {
       <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-navy-800/5 to-transparent rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-4xl mx-auto relative">
-          <div className="text-center mb-12">
-            <h2 className="font-poppins font-bold text-3xl lg:text-5xl text-navy-800 mb-6">
-              {t('about.title')}
-            </h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
-            <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto">
-              {t('about.subtitle')}
-            </p>
-          </div>
-
-          <div className="bg-navy-800 rounded-2xl p-8 lg:p-12 shadow-lg">
-            <div className="relative">
-              <p className="font-inter text-white leading-relaxed text-lg text-center max-w-3xl mx-auto">
-                {/* Sur desktop ou lorsque le texte est développé, afficher tout le texte */}
-                <span
-                  className="hidden lg:block"
-                  id="about-desc-full"
-                  dangerouslySetInnerHTML={{ __html: highlightKeywords(description) }}
-                />
-                {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
-                <span
-                  className="block lg:hidden max-w-full text-justify"
-                  id="about-desc-mobile"
-                  ref={descRef}
-                  dangerouslySetInnerHTML={{ __html: highlightKeywords(isExpanded ? description : truncatedDescription) }}
-                />
-              </p>
-
-              {/* Bouton "voir plus" uniquement sur mobile */}
-              <div className="mt-4 text-center block lg:hidden">
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    setIsExpanded(!isExpanded);
-                    setTimeout(() => {
-                      if (!isExpanded && descRef.current) {
-                        descRef.current.focus();
-                      }
-                    }, 100);
-                  }}
-                  className="text-white hover:text-primary transition-colors focus-visible:ring-2 focus-visible:ring-primary"
-                  aria-expanded={isExpanded}
-                  aria-controls="about-desc-mobile"
-                >
-                  {isExpanded ? (
-                    <>
-                      {language === 'fr' ? 'Voir moins' : 'Show less'}
-                      <ChevronUp className="ml-2 h-4 w-4" />
-                    </>
-                  ) : (
-                    <>
-                      {language === 'fr' ? 'Voir plus' : 'Show more'}
-                      <ChevronDown className="ml-2 h-4 w-4" />
-                    </>
-                  )}
-                </Button>
+        <div className="max-w-5xl mx-auto relative">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Colonne image (optionnelle, illustration ou portrait) */}
+            <div className="hidden lg:flex justify-center items-center">
+              <img
+                src="/mee.png"
+                alt="About portrait"
+                className="w-72 h-96 object-cover rounded-2xl shadow-xl border-4 border-white"
+                style={{ objectPosition: 'top' }}
+              />
+            </div>
+            {/* Colonne texte */}
+            <div>
+              <div className="mb-8 text-center lg:text-left">
+                <h2 className="font-poppins font-extrabold text-3xl lg:text-5xl text-navy-800 mb-4">
+                  {t('about.title')}
+                </h2>
+                <div className="w-20 h-1 bg-primary mx-auto lg:mx-0 rounded-full mb-4" />
+                <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0">
+                  {t('about.subtitle')}
+                </p>
+              </div>
+              <div className="bg-navy-800/95 rounded-2xl p-6 lg:p-8 shadow-lg border border-navy-800">
+                <div className="relative">
+                  <p className="font-inter text-white leading-relaxed text-base sm:text-lg text-justify max-w-3xl mx-auto">
+                    {/* Sur desktop ou lorsque le texte est développé, afficher tout le texte */}
+                    <span
+                      className="hidden lg:block"
+                      id="about-desc-full"
+                      dangerouslySetInnerHTML={{ __html: highlightKeywords(description) }}
+                    />
+                    {/* Sur mobile, afficher le texte tronqué ou complet selon l'état */}
+                    <span
+                      className="block lg:hidden max-w-full text-justify"
+                      id="about-desc-mobile"
+                      ref={descRef}
+                      dangerouslySetInnerHTML={{ __html: highlightKeywords(isExpanded ? description : truncatedDescription) }}
+                    />
+                  </p>
+                  {/* Bouton "voir plus" uniquement sur mobile */}
+                  <div className="mt-4 text-center block lg:hidden">
+                    <Button
+                      variant="ghost"
+                      onClick={() => {
+                        setIsExpanded(!isExpanded);
+                        setTimeout(() => {
+                          if (!isExpanded && descRef.current) {
+                            descRef.current.focus();
+                          }
+                        }, 100);
+                      }}
+                      className="text-primary hover:text-white border border-primary hover:bg-primary/90 transition-colors focus-visible:ring-2 focus-visible:ring-primary px-4 py-2 rounded-full font-semibold"
+                      aria-expanded={isExpanded}
+                      aria-controls="about-desc-mobile"
+                    >
+                      {isExpanded ? (
+                        <>
+                          {language === 'fr' ? 'Voir moins' : 'Show less'}
+                          <ChevronUp className="ml-2 h-4 w-4" />
+                        </>
+                      ) : (
+                        <>
+                          {language === 'fr' ? 'Voir plus' : 'Show more'}
+                          <ChevronDown className="ml-2 h-4 w-4" />
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

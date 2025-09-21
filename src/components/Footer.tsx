@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { FacebookIcon, GithubIcon, LinkedinIcon } from 'lucide-react';
+import { SiTiktok } from 'react-icons/si';
 
 const Footer = () => {
   const { t, language } = useLanguage();
@@ -19,7 +20,8 @@ const Footer = () => {
   const socialLinks = [
     { icon: LinkedinIcon, href: 'https://www.linkedin.com/in/ogoulajesse/', label: 'LinkedIn' },
     { icon: FacebookIcon, href: 'https://www.facebook.com/OgoulaJesse/', label: 'Facebook' },
-    { icon: GithubIcon, href: 'https://github.com/JesseOgoula', label: 'Github' }
+    { icon: GithubIcon, href: 'https://github.com/JesseOgoula', label: 'Github' },
+    { icon: SiTiktok, href: 'https://www.tiktok.com/@aoj0291', label: 'TikTok' }
   ];
 
   return (

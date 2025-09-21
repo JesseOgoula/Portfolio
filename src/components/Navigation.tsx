@@ -50,7 +50,14 @@ const Navigation = () => {
     }`}>
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <div className="font-poppins font-bold text-xl text-navy-800">
+          <div className="font-poppins font-bold text-xl text-navy-800 cursor-pointer" onClick={e => {
+            e.preventDefault();
+            if (location.pathname !== '/') {
+              navigate('/');
+            } else {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+          }} title={t('nav.home')} tabIndex={0} role="button" aria-label={t('nav.home')}>
             <img 
               src="/Favicon.png" 
               alt="Ogoula Jesse Logo" 

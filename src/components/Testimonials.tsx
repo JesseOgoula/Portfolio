@@ -17,6 +17,16 @@ const Testimonials = () => {
       rating: 5,
       image: '/NEL.jpg',
       linkedin: 'https://www.linkedin.com/in/nel-brunel-mankou-madouma/'
+    },
+    {
+      name: 'Bérénice GANGBO',
+  role: language === 'fr' ? 'Responsable administrative et financière' : 'Administrative and Financial Manager',
+      content: language === 'fr'
+        ? `Dans le cadre de ma formation en marketing numérique avec DCLIC (soutenu par l’OIF), j’ai eu le privilège d’être accompagnée par Monsieur Jesse OGOULA comme tuteur. Son engagement, sa disponibilité et sa patience ont été déterminants pour ma progression. Toujours à l’écoute, il apportait des explications claires même sur les modules complexes. Il a partagé généreusement ses connaissances et expériences, ce qui a enrichi mes compétences. Je lui exprime toute ma gratitude pour son accompagnement exemplaire.`
+        : `As part of my digital marketing training with DCLIC (supported by OIF), I had the privilege of being mentored by Mr. Jesse OGOULA. His commitment, availability, and patience were key to my progress. Always attentive, he provided clear explanations even on complex modules. He generously shared his knowledge and experience, which enriched my skills. I express my gratitude for his exemplary support.`,
+      rating: 5,
+  image: '/berenice.jpeg',
+      linkedin: 'https://www.linkedin.com/in/b%C3%A9r%C3%A9nice-gangbo-5385b0344/'
     }
   ];
 
