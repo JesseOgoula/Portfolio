@@ -51,7 +51,7 @@ const Hero = () => {
                   size="lg"
                   className="bg-primary hover:bg-primary/90 text-white font-inter font-semibold text-lg px-8 py-4 rounded-xl shadow-lg flex items-center gap-2 transition-all duration-200 hover:scale-105"
                   onClick={() => {
-                    window.open('https://calendly.com/jesseogoula/appel-de-decouverte', '_blank');
+                    window.location.href = '/schedule';
                   }}
                   tabIndex={0}
                   type="button"
