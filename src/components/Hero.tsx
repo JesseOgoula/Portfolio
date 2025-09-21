@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { ArrowDown } from 'lucide-react';
 import AnimatedCounter from '@/components/AnimatedCounter';
@@ -23,7 +22,10 @@ const Hero = () => {
 
   return (
     <>
-  <section id="accueil" className="min-h-screen flex items-center bg-gradient-to-br from-light-100 to-white relative overflow-hidden pt-8 sm:pt-4 mt-16 sm:mt-4">
+  <section
+    id="accueil"
+    className="min-h-[70vh] sm:min-h-[80vh] flex items-center bg-gradient-to-br from-light-100 to-white relative overflow-hidden pt-2 sm:pt-2 mt-6 sm:mt-2"
+  >
         {/* Background decoration */}
         <div className="absolute top-20 right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 left-10 w-48 h-48 bg-navy-800/5 rounded-full blur-3xl" />
@@ -43,8 +45,8 @@ const Hero = () => {
                 </p>
               </div>
               {/* Stats */}
-              <div className="flex flex-col items-center mb-8">
-                <div className="flex w-full justify-center gap-6 mb-2">
+              <div className="flex flex-col items-center lg:items-start mb-8">
+                <div className="flex w-full justify-center lg:justify-start gap-6 mb-2">
                   {stats.map((stat, index) => (
                     <div key={index} className="text-center min-w-[70px]">
                       <div className="font-poppins font-bold text-xl sm:text-2xl lg:text-3xl text-navy-800 mb-1">
@@ -62,10 +64,16 @@ const Hero = () => {
                 </div>
               </div>
               {/* CTA */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start w-full max-w-xs mx-auto mb-2">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start w-full max-w-xs mb-2">
                 <Button
-                  className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-8 py-3 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full"
-                  onClick={() => window.location.href = '/schedule'}
+                  variant="default"
+                  className="bg-primary hover:bg-primary/90 text-white px-4 sm:px-8 py-3 sm:py-6 rounded-xl font-inter font-medium text-base sm:text-lg transition-all duration-200 hover:scale-105 hover:shadow-lg w-full focus:outline-none focus:ring-2 focus:ring-primary"
+                  onClick={() => {
+                    window.open('https://calendly.com/jesseogoula/appel-de-decouverte', '_blank');
+                  }}
+                  tabIndex={0}
+                  type="button"
+                  aria-label={t('hero.cta')}
                 >
                   {t('hero.cta')}
                 </Button>
