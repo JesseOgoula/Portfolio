@@ -32,24 +32,16 @@ const About = () => {
 
       <div className="container mx-auto px-4 lg:px-8">
         <div className="max-w-5xl mx-auto relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Colonne image (optionnelle, illustration ou portrait) */}
-            <div className="hidden lg:flex justify-center items-center">
-              <img
-                src="/mee.png"
-                alt="About portrait"
-                className="w-72 h-96 object-cover rounded-2xl shadow-xl border-4 border-white"
-                style={{ objectPosition: 'top' }}
-              />
-            </div>
+          <div className="flex flex-col items-center justify-center">
+            {/* Colonne image supprimée */}
             {/* Colonne texte */}
             <div>
-              <div className="mb-8 text-center lg:text-left">
+              <div className="mb-8 text-center">
                 <h2 className="font-poppins font-extrabold text-3xl lg:text-5xl text-navy-800 mb-4">
                   {t('about.title')}
                 </h2>
-                <div className="w-20 h-1 bg-primary mx-auto lg:mx-0 rounded-full mb-4" />
-                <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0">
+                <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4" />
+                <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto text-center">
                   {t('about.subtitle')}
                 </p>
               </div>
