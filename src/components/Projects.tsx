@@ -1,15 +1,32 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { Sparkles } from 'lucide-react';
 
 const Projects = () => {
   const { language } = useLanguage();
 
   const projects = [
     {
+      title: 'SikaApp',
+      category: language === 'fr' ? 'Application Mobile' : 'Mobile App',
+      duration: language === 'fr' ? 'En cours' : 'Ongoing',
+      description: language === 'fr'
+        ? 'Application mobile personnelle de gestion financière boostée à l\'IA et au Machine Learning. Analyse automatique des SMS bancaires, catégorisation intelligente des dépenses, prédictions budgétaires et recommandations personnalisées pour une meilleure santé financière.'
+        : 'Personal mobile financial management app powered by AI and Machine Learning. Automatic bank SMS analysis, smart expense categorization, budget predictions, and personalized recommendations for better financial health.',
+      logo: '/logored.png',
+      banner: '/Sikaapp.jpeg',
+      isPersonal: true,
+      stats: [
+        { label: language === 'fr' ? 'Technologie' : 'Technology', value: 'Flutter' },
+        { label: 'AI/ML', value: language === 'fr' ? 'Intégré' : 'Built-in' },
+        { label: 'Status', value: 'Beta' }
+      ]
+    },
+    {
       title: 'Africakard',
       category: language === 'fr' ? 'Gestion de produit' : 'Product Management',
       duration: language === 'fr' ? '4 mois' : '4 months',
-      description: language === 'fr' 
+      description: language === 'fr'
         ? 'plateforme en ligne, spécialisée dans la vente de cartes cadeaux numériques et d\'abonnements pour divers services de divertissement et de jeux.'
         : 'Online platform, specializing in the sale of digital gift cards and subscriptions for various entertainment and gaming services.',
       logo: '/logos/LOGO AFRICAKARD@300x.png',
@@ -91,7 +108,7 @@ const Projects = () => {
             {language === 'fr' ? 'Réalisations' : 'Portfolio'}
           </h2>
           <p className="font-inter text-lg text-gray-600 max-w-2xl mx-auto">
-            {language === 'fr' 
+            {language === 'fr'
               ? 'Découvrez quelques projets significatifs sur lesquels j\'ai eu l\'opportunité d\'avoir un impact.'
               : 'Discover some significant projects where I had the opportunity to make an impact.'}
           </p>
@@ -99,8 +116,15 @@ const Projects = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (
-            <Card key={index} className="overflow-hidden bg-white hover:shadow-lg transition-shadow">
+            <Card key={index} className={`overflow-hidden bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 ${project.isPersonal ? 'ring-2 ring-primary/30' : ''}`}>
               <CardContent className="p-0">
+                {/* Personal Project Badge */}
+                {project.isPersonal && (
+                  <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 bg-gradient-to-r from-primary to-primary/80 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    {language === 'fr' ? 'Projet Personnel' : 'Personal Project'}
+                  </div>
+                )}
                 {/* Bannière du projet */}
                 <div className="relative h-48 bg-gray-100">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50">
