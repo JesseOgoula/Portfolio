@@ -118,12 +118,34 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     return Object.keys(newErrors).length === 0;
   };
 
-  // Génération du lien direct d'ajout à Google Calendar
+  // Formatage de la date sélectionnée pour l'affichage
+  const getFormattedDisplayDate = () => {
+    if (!formData.preferredDate) {
+      return language === 'fr' ? 'Date à convenir (flexible)' : 'Date to be confirmed (flexible)';
+    }
+    try {
+      const parts = formData.preferredDate.split('-');
+      if (parts.length === 3) {
+        const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        return d.toLocaleDateString(language === 'fr' ? 'fr-FR' : 'en-US', {
+          weekday: 'short',
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+        });
+      }
+      return formData.preferredDate;
+    } catch {
+      return formData.preferredDate;
+    }
+  };
+
+  // Génération du lien direct d'ajout à Google Calendar — pensé pour le client / prospect
   const getGoogleCalendarUrl = () => {
     const eventTitle = encodeURIComponent(
       language === 'fr'
-        ? `Échange Projet : ${formData.name || 'Client'}${formData.company ? ` (${formData.company})` : ''} — ${selectedTypeLabel}`
-        : `Project Meeting: ${formData.name || 'Client'}${formData.company ? ` (${formData.company})` : ''} — ${selectedTypeLabel}`
+        ? `Session Stratégique (30 min) : Jesse Ogoula × ${formData.name || 'Projet'}`
+        : `Strategic Briefing (30 min): Jesse Ogoula × ${formData.name || 'Project'}`
     );
 
     let dateStr = formData.preferredDate;
@@ -157,25 +179,54 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     const dates = `${cleanDate}T${pad(startH)}${pad(startM)}00/${cleanDate}T${pad(finalEndH)}${pad(finalEndM)}00`;
 
     const details = encodeURIComponent(
-      `PROJET : ${selectedTypeLabel}\n` +
-      `CLIENT : ${formData.name}\n` +
-      (formData.company ? `SOCIÉTÉ : ${formData.company}\n` : '') +
-      `EMAIL : ${formData.email}\n` +
-      `TÉLÉPHONE / WHATSAPP : ${formData.phone}\n` +
-      `CANAL SOUHAITÉ : ${selectedChannelLabel}\n\n` +
-      `DESCRIPTION DU PROJET :\n${formData.description}\n\n` +
-      (formData.channel === 'google-meet' ? 'NOTE: Visioconférence Google Meet demandée.\n' : '')
+      language === 'fr'
+        ? `Rendez-vous de cadrage stratégique de 30 minutes avec Jesse Ogoula.\n\n` +
+          `🎯 OBJECTIF DE LA SESSION (30 MIN) :\n` +
+          `Faire le point sur vos enjeux, diagnostiquer vos goulots d'étranglement opérationnels et identifier les opportunités concrètes pour votre projet (${selectedTypeLabel}).\n\n` +
+          `📋 DÉTAIL DU PROJET TRANSMIS :\n` +
+          `"${formData.description}"\n\n` +
+          `📍 FORMAT & CANAL :\n` +
+          `${selectedChannelLabel}${formData.channel === 'google-meet' ? ' (Visioconférence Google Meet)' : ''}\n\n` +
+          `👤 VOTRE INTERVENANT :\n` +
+          `Jesse Ogoula — AI & Digital Transformation Lead\n` +
+          `• Email : adirignoogoula@gmail.com\n` +
+          `• Téléphone / WhatsApp : +241 077 61 75 69 / +241 066 19 57 86\n` +
+          `• Portfolio : https://www.ogoulajesse.pro\n\n` +
+          `👤 VOS COORDONNÉES ENREGISTRÉES :\n` +
+          `• Nom : ${formData.name}\n` +
+          (formData.company ? `• Entreprise : ${formData.company}\n` : '') +
+          (formData.email ? `• Email : ${formData.email}\n` : '') +
+          (formData.phone ? `• Téléphone / WhatsApp : ${formData.phone}\n` : '') +
+          `\n💡 Pensez à vous connecter 2 minutes avant l'heure prévue pour démarrer à l'heure.`
+        : `30-minute Strategic Discovery Session with Jesse Ogoula.\n\n` +
+          `🎯 SESSION OBJECTIVE (30 MIN):\n` +
+          `Assess your opportunities, identify operational bottlenecks, and outline actionable next steps for your project (${selectedTypeLabel}).\n\n` +
+          `📋 YOUR PROJECT BRIEF:\n` +
+          `"${formData.description}"\n\n` +
+          `📍 MEETING FORMAT:\n` +
+          `${selectedChannelLabel}${formData.channel === 'google-meet' ? ' (Google Meet Video Call)' : ''}\n\n` +
+          `👤 HOST:\n` +
+          `Jesse Ogoula — AI & Digital Transformation Lead\n` +
+          `• Email: adirignoogoula@gmail.com\n` +
+          `• Phone / WhatsApp: +241 077 61 75 69 / +241 066 19 57 86\n` +
+          `• Website: https://www.ogoulajesse.pro\n\n` +
+          `👤 YOUR CONTACT DETAILS:\n` +
+          `• Name: ${formData.name}\n` +
+          (formData.company ? `• Company: ${formData.company}\n` : '') +
+          (formData.email ? `• Email: ${formData.email}\n` : '') +
+          (formData.phone ? `• Phone / WhatsApp: ${formData.phone}\n` : '') +
+          `\n💡 Please connect 2 minutes before the scheduled time to optimize the session.`
     );
 
     const location = encodeURIComponent(
       formData.channel === 'google-meet'
-        ? 'Google Meet'
+        ? 'Google Meet (Visioconférence)'
         : formData.channel === 'whatsapp'
-          ? `WhatsApp : ${formData.phone}`
-          : `Téléphone : ${formData.phone}`
+          ? `WhatsApp : +241 077 61 75 69`
+          : `Téléphone : +241 077 61 75 69`
     );
 
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${dates}&details=${details}&location=${location}${formData.email ? `&add=${encodeURIComponent(formData.email)}` : ''}`;
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${dates}&details=${details}&location=${location}&add=adirignoogoula@gmail.com`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -259,34 +310,6 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     setIsSubmitted(true);
   };
 
-  // WhatsApp formatted message link
-  const whatsappText = encodeURIComponent(
-    `Bonjour Jesse, je souhaite échanger sur mon projet :\n\n` +
-    `• Nom : ${formData.name}\n` +
-    (formData.company ? `• Entreprise : ${formData.company}\n` : '') +
-    `• Contact : ${formData.phone || formData.email}\n` +
-    `• Type de projet : ${selectedTypeLabel}\n` +
-    (formData.preferredDate ? `• Date souhaitée : ${formData.preferredDate} (${selectedTimeLabel})\n` : '') +
-    `• Canal : ${selectedChannelLabel}\n` +
-    `• Objet : ${formData.description}`
-  );
-  const whatsappUrl = `https://wa.me/241077617569?text=${whatsappText}`;
-
-  // Email formatted link
-  const emailSubject = encodeURIComponent(`Demande de rendez-vous projet — ${formData.name}`);
-  const emailBody = encodeURIComponent(
-    `Bonjour Jesse,\n\nJe souhaite organiser un rendez-vous de cadrage pour mon projet :\n\n` +
-    `Nom : ${formData.name}\n` +
-    `Société : ${formData.company || 'N/A'}\n` +
-    `Téléphone : ${formData.phone || 'N/A'}\n` +
-    `Email : ${formData.email || 'N/A'}\n` +
-    `Type de projet : ${selectedTypeLabel}\n` +
-    `Date / Créneau souhaité : ${formData.preferredDate || 'À définir'} (${selectedTimeLabel})\n` +
-    `Canal : ${selectedChannelLabel}\n\n` +
-    `Description du projet :\n${formData.description}\n\nCordialement,`
-  );
-  const mailtoUrl = `mailto:adirignoogoula@gmail.com,contact@ogoulajesse.pro?subject=${emailSubject}&body=${emailBody}`;
-
   return (
     <div
       data-lenis-prevent="true"
@@ -314,63 +337,110 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
         </button>
 
         {isSubmitted ? (
-          /* Confirmation View */
-          <div className="text-center py-6 sm:py-8 space-y-6">
-            <div className="w-16 h-16 bg-[#a45252]/15 border border-[#a45252]/30 text-[#e07a7a] rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
+          /* Redesigned Confirmation View — Client Centric with Google Calendar Reminder */
+          <div className="py-2 sm:py-4 space-y-6 text-center">
+            {/* Success Pill */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1b2a1e] border border-[#2d5236] text-[#4ade80] font-mono text-[10px] tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
+              <span>{language === 'fr' ? '// DEMANDE ENREGISTRÉE AVEC SUCCÈS' : '// REQUEST CONFIRMED'}</span>
             </div>
 
+            {/* Title & Description */}
             <div className="space-y-2">
-              <span className="font-mono text-[9px] tracking-[0.25em] text-[#a45252] uppercase block">
-                {language === 'fr' ? '// DEMANDE BIEN REÇUE' : '// REQUEST RECEIVED'}
-              </span>
               <h3 className="font-sans font-black uppercase text-2xl sm:text-3xl text-white tracking-tight">
-                {language === 'fr' ? 'MERCI POUR VOTRE DEMANDE !' : 'THANK YOU!'}
+                {language === 'fr' ? 'MERCI POUR VOTRE DEMANDE !' : 'THANK YOU FOR REACHING OUT!'}
               </h3>
-              <p className="font-sans text-xs sm:text-sm text-[#B5B5B5] max-w-md mx-auto leading-relaxed">
+              <p className="font-sans text-xs sm:text-sm text-[#A5A5A5] max-w-lg mx-auto leading-relaxed">
                 {language === 'fr'
-                  ? `Votre projet a bien été enregistré. Vous pouvez l'ajouter directement à votre calendrier et me notifier instantanément :`
-                  : `Your project briefing has been recorded. You can add it directly to your calendar and notify me instantly:`}
+                  ? `Votre projet a bien été transmis à Jesse Ogoula. Ajoutez dès maintenant ce créneau de 30 minutes à votre calendrier pour activer votre rappel automatique avant la réunion :`
+                  : `Your project briefing has been sent to Jesse Ogoula. Add this 30-minute session to your calendar now to activate your automatic reminder:`}
               </p>
             </div>
 
-            {/* Quick Actions Post-Submit (Calendar + WhatsApp + Email) */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+            {/* Meeting Briefing Card */}
+            <div className="bg-[#121218] border border-white/10 rounded-xl p-5 sm:p-6 text-left max-w-lg mx-auto shadow-inner space-y-4">
+              <div className="flex items-center justify-between pb-3 hairline-b">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-[#888]">
+                  {language === 'fr' ? '// FICHE DE RENDEZ-VOUS' : '// SESSION BRIEFING'}
+                </span>
+                <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">
+                  ⏱️ 30 MIN
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div>
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#666] block mb-1">
+                    {language === 'fr' ? 'Intervenant' : 'Host'}
+                  </span>
+                  <div className="font-semibold text-white">Jesse Ogoula</div>
+                  <div className="text-[11px] text-[#888]">AI & Digital Transformation Lead</div>
+                </div>
+
+                <div>
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#666] block mb-1">
+                    {language === 'fr' ? 'Format & Canal' : 'Meeting Format'}
+                  </span>
+                  <div className="font-semibold text-white flex items-center gap-1.5">
+                    {formData.channel === 'google-meet' && <Video className="w-3.5 h-3.5 text-[#4285F4]" />}
+                    {formData.channel === 'whatsapp' && <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />}
+                    {formData.channel === 'phone' && <Phone className="w-3.5 h-3.5 text-zinc-300" />}
+                    <span>{selectedChannelLabel}</span>
+                  </div>
+                  <div className="text-[11px] text-[#888]">
+                    {formData.channel === 'google-meet'
+                      ? (language === 'fr' ? 'Lien visio inclus dans le calendrier' : 'Video call link in invite')
+                      : (language === 'fr' ? 'Échange direct' : 'Direct Call')}
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2 pt-2 hairline-t">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#666] block mb-1">
+                    {language === 'fr' ? 'Date & Créneau prévus' : 'Scheduled Date & Time'}
+                  </span>
+                  <div className="font-semibold text-white flex items-center gap-2">
+                    <CalendarIcon className="w-3.5 h-3.5 text-[#a45252]" />
+                    <span>{getFormattedDisplayDate()} — {selectedTimeLabel}</span>
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2 pt-2 hairline-t">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#666] block mb-1">
+                    {language === 'fr' ? 'Thématique' : 'Topic'}
+                  </span>
+                  <div className="text-[#ccc] leading-snug">
+                    {selectedTypeLabel}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Single Prominent Button: Google Calendar */}
+            <div className="pt-2 max-w-lg mx-auto space-y-3">
               <a
                 href={getGoogleCalendarUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#4285F4] hover:bg-[#3367D6] text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-lg shadow-blue-500/10"
+                className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#F4F4F4] hover:bg-[#FFFFFF] text-[#050505] font-mono text-xs font-black uppercase tracking-[0.15em] rounded-xl transition-all shadow-xl hover:shadow-2xl hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
-                <CalendarIcon className="w-4 h-4" />
-                <span>{language === 'fr' ? 'Ajouter à mon Google Calendar' : 'Add to Google Calendar'}</span>
+                <CalendarIcon className="w-4 h-4 text-[#050505]" />
+                <span>{language === 'fr' ? 'AJOUTER À MON GOOGLE CALENDAR' : 'ADD TO MY GOOGLE CALENDAR'}</span>
               </a>
 
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-black font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
-              >
-                <MessageSquare className="w-4 h-4" />
-                <span>{language === 'fr' ? 'Notifier sur WhatsApp' : 'Notify on WhatsApp'}</span>
-              </a>
-
-              <a
-                href={mailtoUrl}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg border border-white/15 transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>{language === 'fr' ? 'Envoyer par Email' : 'Send via Email'}</span>
-              </a>
+              <p className="font-mono text-[10px] text-[#777] max-w-md mx-auto leading-relaxed">
+                {language === 'fr'
+                  ? '⚡ Enregistre la session dans votre calendrier avec le sujet, le créneau et le rappel automatique.'
+                  : '⚡ Saves the session into your calendar with full briefing notes and automatic reminder.'}
+              </p>
             </div>
 
+            {/* Dismiss Link */}
             <div className="pt-4 hairline-t text-center">
               <button
                 onClick={onClose}
                 className="font-mono text-xs text-[#888] hover:text-white underline underline-offset-4 uppercase tracking-widest transition-colors cursor-pointer"
               >
-                {language === 'fr' ? 'Fermer cette fenêtre' : 'Close window'}
+                {language === 'fr' ? 'Fermer cette fenêtre' : 'Close this window'}
               </button>
             </div>
           </div>
