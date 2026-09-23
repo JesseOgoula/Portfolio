@@ -4,98 +4,262 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 0 0% 2%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 0 0% 23%;
+    --muted-foreground: 0 0% 71%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 0 0% 8%;
+    --accent-foreground: 0 0% 96%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 12%;
+    --input: 0 0% 12%;
+    --ring: 0 0% 96%;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0px;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  *:not(.cursor-circle) {
+    border-radius: 0 !important;
   }
-}
 
-@layer base {
-  * {
-    @apply border-border;
+  .cursor-circle {
+    border-radius: 9999px !important;
+  }
+
+  html {
+    scroll-behavior: auto; /* Lenis takes care of smooth scrolling */
+    color-scheme: dark;
+    background-color: #050505;
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: #050505;
+    color: #F4F4F4;
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: #F4F4F4;
+    color: #050505;
   }
 }
+
+/* Custom Filmstrip Ribbon & 3D Perspective Effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+@keyframes ribbonOrbit {
+  0% {
+    transform: rotateX(12deg) rotateY(0deg) rotateZ(-6deg) translateX(0);
+  }
+  50% {
+    transform: rotateX(16deg) rotateY(180deg) rotateZ(-3deg) translateX(-20px);
+  }
+  100% {
+    transform: rotateX(12deg) rotateY(360deg) rotateZ(-6deg) translateX(0);
+  }
+}
+
+@keyframes ribbonFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(-8deg) scale(1);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-6deg) scale(1.02);
+  }
+}
+
+@keyframes marqueeScroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeScrollReverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-ribbon-orbit {
+  animation: ribbonOrbit 30s linear infinite;
+}
+
+.animate-ribbon-float {
+  animation: ribbonFloat 8s ease-in-out infinite;
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 35s linear infinite;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marqueeScrollReverse 35s linear infinite;
+}
+
+.animate-marquee:hover,
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeOscillate {
+  0% {
+    transform: translate3d(-12%, 0, 0);
+  }
+  100% {
+    transform: translate3d(12%, 0, 0);
+  }
+}
+
+.animate-marquee-oscillate {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marqueeOscillate 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes floatDriftA {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-12px) translateX(4px);
+  }
+}
+
+@keyframes floatDriftB {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(10px) translateX(-6px);
+  }
+}
+
+@keyframes floatDriftC {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+.animate-float-a {
+  animation: floatDriftA 6s ease-in-out infinite;
+}
+
+.animate-float-b {
+  animation: floatDriftB 7.5s ease-in-out infinite;
+}
+
+.animate-float-c {
+  animation: floatDriftC 9s ease-in-out infinite;
+}
+
+/* Custom Editorial Film Frame Border */
+.film-perforations {
+  background-image: radial-gradient(circle, #08080a 3px, transparent 3.5px);
+  background-size: 16px 16px;
+}
+
+/* Noise overlay utility */
+.noise-bg {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Lenis Recommended CSS */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* 1px Hairlines */
+.hairline-b {
+  border-bottom: 1px solid #1a1a1a;
+}
+.hairline-t {
+  border-top: 1px solid #1a1a1a;
+}
+.hairline-y {
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+.hairline-r {
+  border-right: 1px solid #1a1a1a;
+}
+.hairline-l {
+  border-left: 1px solid #1a1a1a;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222222;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+

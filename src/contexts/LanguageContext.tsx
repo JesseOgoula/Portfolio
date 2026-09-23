@@ -12,26 +12,92 @@ interface Translations {
 const translations: Translations = {
   // Navigation
   'nav.home': { fr: 'Accueil', en: 'Home' },
+  'nav.work': { fr: 'Projets', en: 'Work' },
+  'nav.services': { fr: 'Expertises', en: 'Services' },
+  'nav.collaborations': { fr: 'Collaborations', en: 'Collaborations' },
+  'nav.archive': { fr: 'Archives', en: 'Archive' },
   'nav.about': { fr: 'À propos', en: 'About' },
   'nav.portfolio': { fr: 'Réalisations', en: 'Portfolio' },
   'nav.contact': { fr: 'Contact', en: 'Contact' },
+  'nav.status': { fr: 'DISPONIBLE POUR PROJETS & MISSIONS', en: 'AVAILABLE FOR WORK & CONTRACTS' },
   
   // Hero Section
+  'hero.bigTitle1': { fr: 'LE TRAVAIL QUI', en: 'WORK THAT' },
+  'hero.bigTitle2': { fr: 'COMMENCE PAR', en: 'BEGINS WITH' },
+  'hero.bigTitle3': { fr: 'LA STRATÉGIE.', en: 'STRATEGY.' },
   'hero.title': { fr: 'De l’idée au produit, du talent à l’expertise.', en: 'From idea to product, from talent to expertise.' },
   'hero.subtitle': {
-    fr: "Entrepreneur du numérique, Product & Growth Manager et formateur engagé : je crée, j’accompagne et je forme pour que vos projets deviennent des réussites durables.",
-    en: "Digital entrepreneur, Product & Growth Manager and committed trainer: I create, support, and train so your projects become lasting successes."
+    fr: "Entrepreneur du numérique, Product & Growth Manager et formateur engagé : je conçois des systèmes d'identité, des produits centrés utilisateurs et des stratégies de croissance à fort impact.",
+    en: "Digital entrepreneur, Product & Growth Manager and committed trainer: I build user-centric digital environments, scalable products and high-impact growth strategies."
   },
+  'hero.badge1': { fr: 'PRODUCT & GROWTH MANAGER', en: 'PRODUCT & GROWTH MANAGER' },
+  'hero.badge2': { fr: 'FORMATEUR DIGITAL & IA', en: 'DIGITAL & AI TRAINER' },
+  'hero.location': { fr: 'Libreville, Gabon • International', en: 'Libreville, Gabon • Worldwide' },
   'hero.cta': { fr: 'Réserver un call', en: 'Book a call' },
+  'hero.ctaProjects': { fr: 'Explorer les travaux', en: 'Explore Work' },
   'hero.stats.projects': { fr: 'projets réalisés', en: 'completed projects' },
   'hero.stats.growth': { fr: 'croissance moyenne', en: 'average growth' },
-  'hero.stats.students': { fr: 'apprenants', en: 'students mentored' },
+  'hero.stats.students': { fr: 'talents formés', en: 'talents mentored' },
   'hero.download.cv': { fr: 'Télécharger CV', en: 'Download CV' },
   'hero.role': { fr: 'Product & Growth Manager / Formateur', en: 'Product & Growth Manager / Trainer' },
+
+  // Manifestos
+  'manifesto.1': {
+    fr: "NOUS REJETONS LE SUPERFLU, CONSTRUISANT DES SYSTÈMES D'IDENTITÉ ET DES ENVIRONNEMENTS DIGITAUX ANCRÉS DANS UNE CLARTÉ RADICALE, L'IMPACT ET UN SAVOIR-FAIRE SANS CONCESSION.",
+    en: "WE REJECT THE SUPERFLUOUS, BUILDING IDENTITY SYSTEMS AND DIGITAL ENVIRONMENTS GROUNDED IN EXTREME CLARITY, PURPOSE, AND UNCOMPROMISED CRAFT."
+  },
+  'manifesto.1.highlight': { fr: "ANCRÉS", en: "GROUNDED" },
+  'manifesto.2': {
+    fr: "UN TRAVAIL REMARQUABLE NAÎT DE BONNES QUESTIONS. LA STRATÉGIE OFFRE LA DIRECTION, LE DESIGN LUI DONNE FORME, ET LE RAFFINEMENT GARANTIT QUE CHAQUE DÉTAIL SERT LA VISION GLOBALE.",
+    en: "GOOD WORK IS BUILT ON GOOD QUESTIONS. STRATEGY PROVIDES THE DIRECTION, DESIGN GIVES IT FORM, AND REFINEMENT ENSURES EVERY DETAIL SUPPORTS THE BIGGER PICTURE."
+  },
+  'manifesto.2.highlight': { fr: "GARANTIT", en: "ENSURES" },
+
+  // Featured Project
+  'featured.label': { fr: 'PROJET VEDETTE', en: 'FEATURED PROJECT' },
+  'featured.viewCase': { fr: 'Consulter le projet', en: 'View Case Study' },
+  'featured.live': { fr: 'Plateforme en ligne', en: 'Live Platform' },
+  'featured.stack': { fr: 'STACK & MÉTHODOLOGIE', en: 'STACK & METHODOLOGY' },
   
+  // Interactive Services
+  'services.sectionTitle': { fr: 'SERVICES & EXPERTISES', en: 'SERVICES & CAPABILITIES' },
+  'services.title': { fr: 'Mes Expertises', en: 'Capabilities' },
+  'services.subtitle': { fr: 'Une approche stratégique, mesurée et orientée résultats pour transformer votre vision.', en: 'A strategic, measured and outcome-driven approach to scale your vision.' },
+  'services.consulting.title': { fr: 'GROWTH STRATEGY & AUDIT', en: 'GROWTH STRATEGY & AUDIT' },
+  'services.consulting.description': { fr: 'Stratégies de croissance multicanale, audit de performance et optimisation des conversions.', en: 'Multichannel growth strategies, performance audits and conversion optimization.' },
+  'services.consulting.fullDescription': {
+    fr: `Nous aidons les entreprises à accélérer leur croissance en combinant audit de performance, stratégie multicanale et recommandations concrètes. Après avoir analysé vos forces et vos opportunités, nous définissons les canaux et tactiques les plus efficaces, vous fournissons un coaching stratégique pour passer à l’action, optimisons vos processus pour maximiser les conversions, et mettons en place des tableaux de bord et analytics pour suivre vos résultats et ajuster la stratégie en continu. L’objectif : transformer vos données et vos idées en actions concrètes pour booster votre business.`,
+    en: `We help companies accelerate their growth by combining performance audits, multichannel strategy, and concrete recommendations. After analyzing your strengths and opportunities, we define the most effective channels and tactics, provide strategic coaching to help you take action, optimize your processes to maximize conversions, and set up dashboards and analytics to track your results and adjust strategy continuously. The goal: turn your data and ideas into concrete actions to boost your business.`
+  },
+  'services.formation.title': { fr: 'FORMATION DIGITALE & IA', en: 'DIGITAL & AI TRAINING' },
+  'services.formation.description': { fr: 'Pédagogie active certifiée OIF/Simplon en marketing digital, IA pour les professionnels et transformation.', en: 'Certified OIF/Simplon active pedagogy in digital marketing, AI for business and transformation.' },
+  'services.formation.fullDescription': {
+    fr: `Nous formons les professionnels à maîtriser le marketing digital et la transformation digitale à travers des modules pratiques et des cas concrets. Nos sessions couvrent le marketing digital (SEO, réseaux sociaux, acquisition), l’acculturation numérique (enjeux, vocabulaire, culture digitale), l’initiation à l’IA et aux outils no-code, tout en offrant un suivi personnalisé pour progresser à votre rythme. Grâce à des exercices pratiques et des mises en situation, vous repartez avec des compétences directement applicables pour améliorer vos projets et votre efficacité digitale.`,
+    en: `We train professionals to master digital marketing and digital transformation through practical modules and real-world cases. Our sessions cover digital marketing (SEO, social media, acquisition), digital awareness (issues, vocabulary, digital culture), introduction to AI and no-code tools, all with personalized support to help you progress at your own pace. Thanks to practical exercises and real-life scenarios, you leave with directly applicable skills to improve your projects and digital efficiency.`
+  },
+  'services.cta.main': { fr: 'Explorer le service', en: 'Explore service' },
+  'services.cta.all': { fr: 'Voir tous les services', en: 'View all services' },
+
+  // Collaborations
+  'collab.title': { fr: 'UNE SÉLECTION DE COLLABORATIONS RÉCENTES', en: 'A SELECTION OF RECENT COLLABORATIONS' },
+  'collab.subtitle': { fr: 'Entreprises, institutions et startups accompagnées dans leur passage à l’échelle.', en: 'Enterprises, institutions, and startups empowered to scale.' },
+  'collab.client': { fr: 'CLIENT / PROJET', en: 'CLIENT / PROJECT' },
+  'collab.role': { fr: 'MISSION / SERVICES', en: 'SCOPE & ROLE' },
+  'collab.year': { fr: 'ANNÉE', en: 'YEAR' },
+  'collab.status': { fr: 'STATUT', en: 'STATUS' },
+
+  // Archive
+  'archive.title': { fr: 'ARCHIVES & TRAVAUX SÉLECTIONNÉS', en: 'SELECTED WORKS & ARCHIVE' },
+  'archive.all': { fr: 'Tous', en: 'All' },
+  'archive.product': { fr: 'Produit & IA', en: 'Product & AI' },
+  'archive.growth': { fr: 'Growth & Audit', en: 'Growth & Audit' },
+  'archive.training': { fr: 'Formation & EdTech', en: 'Training & EdTech' },
+  'archive.web': { fr: 'Web & Plateformes', en: 'Web & Platforms' },
+
   // About Section
   'about.title': { fr: 'À propos', en: 'About Me' },
-  'about.subtitle': { fr: 'Mon parcours et ma vision', en: 'My journey and vision' },
+  'about.heading': { fr: "L'ESPRIT DERRIÈRE LE TRAVAIL", en: "THE MIND BEHIND THE CRAFT" },
+  'about.subtitle': { fr: 'Parcours, vision et méthodologie', en: 'Journey, vision and methodology' },
   'about.description': {
     fr: `Product & Growth Manager / Formateur engagé, passionné par le numérique comme levier de croissance et d’autonomisation en Afrique.
 
@@ -58,24 +124,6 @@ My mission: to turn your ideas into innovative products and to transmit the skil
   'partners.subtitle': { fr: 'Des entreprises et organisations avec lesquelles j\'ai eu le plaisir de collaborer', en: 'Companies and organizations I have had the pleasure to work with' },
   'partners.collaboration': { fr: 'Et bien d\'autres encore...', en: 'And many more...' },
   
-  // Services Section
-  'services.title': { fr: 'Mes Services', en: 'My Services' },
-  'services.subtitle': { fr: 'Des solutions sur-mesure pour impulser votre croissance et co-créer votre succès numérique', en: 'Tailor-made solutions to boost your growth and co-create your digital success' },
-  'services.consulting.title': { fr: 'Consulting Growth', en: 'Growth Consulting' },
-  'services.consulting.description': { fr: 'Stratégies de croissance personnalisées pour accélérer votre développement business.', en: 'Personalized growth strategies to accelerate your business development.' },
-  'services.consulting.fullDescription': {
-    fr: `Nous aidons les entreprises à accélérer leur croissance en combinant audit de performance, stratégie multicanale et recommandations concrètes. Après avoir analysé vos forces et vos opportunités, nous définissons les canaux et tactiques les plus efficaces, vous fournissons un coaching stratégique pour passer à l’action, optimisons vos processus pour maximiser les conversions, et mettons en place des tableaux de bord et analytics pour suivre vos résultats et ajuster la stratégie en continu. L’objectif : transformer vos données et vos idées en actions concrètes pour booster votre business.`,
-    en: `We help companies accelerate their growth by combining performance audits, multichannel strategy, and concrete recommendations. After analyzing your strengths and opportunities, we define the most effective channels and tactics, provide strategic coaching to help you take action, optimize your processes to maximize conversions, and set up dashboards and analytics to track your results and adjust strategy continuously. The goal: turn your data and ideas into concrete actions to boost your business.`
-  },
-  'services.formation.title': { fr: 'Formation', en: 'Training' },
-  'services.formation.description': { fr: 'Formation en marketing numérique et transformation digitale.', en: 'OIF certified training in digital marketing and digital transformation.' },
-  'services.formation.fullDescription': {
-    fr: `Nous formons les professionnels à maîtriser le marketing digital et la transformation digitale à travers des modules pratiques et des cas concrets. Nos sessions couvrent le marketing digital (SEO, réseaux sociaux, acquisition), l’acculturation numérique (enjeux, vocabulaire, culture digitale), l’initiation à l’IA et aux outils no-code, tout en offrant un suivi personnalisé pour progresser à votre rythme. Grâce à des exercices pratiques et des mises en situation, vous repartez avec des compétences directement applicables pour améliorer vos projets et votre efficacité digitale.`,
-    en: `We train professionals to master digital marketing and digital transformation through practical modules and real-world cases. Our sessions cover digital marketing (SEO, social media, acquisition), digital awareness (issues, vocabulary, digital culture), introduction to AI and no-code tools, all with personalized support to help you progress at your own pace. Thanks to practical exercises and real-life scenarios, you leave with directly applicable skills to improve your projects and digital efficiency.`
-  },
-  'services.cta.main': { fr: 'En savoir plus', en: 'Learn more' },
-  'services.cta.all': { fr: 'Voir tous les services', en: 'View all services' },
-  
   // Certifications Section
   'certifications.title': { fr: 'Certifications & Distinctions', en: 'Certifications & Awards' },
   'certifications.professional': { fr: 'Certifications Professionnelles', en: 'Professional Certifications' },
@@ -83,6 +131,11 @@ My mission: to turn your ideas into innovative products and to transmit the skil
   'certifications.verify': { fr: 'Vérifier', en: 'Verify' },
   
   // Footer
+  'footer.headline': { fr: 'CRÉONS QUELQUE CHOSE DE SIGNIFICATIF.', en: "LET'S CREATE SOMETHING MEANINGFUL." },
+  'footer.subtitle': {
+    fr: "Un produit à concevoir ? Une stratégie de croissance à déployer ? Ou des équipes à former ? Échangeons dès aujourd'hui.",
+    en: "A product to design? A growth strategy to deploy? Or a team to upskill? Let's connect today."
+  },
   'footer.description': {
     fr: "Product & Growth Manager / Formateur engagé, j'aide les entreprises et les talents à innover, se transformer et acquérir les compétences clés du digital.",
     en: "Product & Growth Manager / Committed Trainer, I help companies and talents innovate, transform, and acquire key digital skills."

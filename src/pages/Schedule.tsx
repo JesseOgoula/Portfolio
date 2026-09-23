@@ -50,32 +50,37 @@ const Schedule = () => {
   return (
     <>
       <Navigation />
-      <div className="min-h-screen bg-light-100 pt-20 pb-8 flex flex-col">
+      <div className="min-h-screen bg-[#08080a] text-white pt-24 pb-12 flex flex-col">
         <div className="container mx-auto px-4 lg:px-8 py-4 sm:py-8 flex-1 flex flex-col">
           {/* Back button */}
           <Button
             variant="ghost"
             onClick={() => navigate('/#contact')}
-            className="mb-4 sm:mb-8 hover:bg-gray-100 text-sm sm:text-base"
+            className="mb-4 sm:mb-8 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white border border-white/10 rounded-full w-fit px-4 py-2 font-space text-xs uppercase tracking-wider"
           >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-            {language === 'fr' ? 'Retour' : 'Back'}
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            {language === 'fr' ? 'Retour au site' : 'Back to home'}
           </Button>
 
           {/* Title */}
-          <h1 className="font-poppins font-bold text-2xl sm:text-3xl text-navy-800 mb-4 sm:mb-6 text-center">
-            {language === 'fr' 
-              ? 'Planifier votre appel découverte'
-              : 'Schedule your discovery call'
-            }
-          </h1>
+          <div className="text-center mb-6 sm:mb-8">
+            <span className="font-space text-xs text-primary uppercase tracking-widest block mb-2">
+              // DISCOVERY CALL // 30 MIN
+            </span>
+            <h1 className="font-syne font-extrabold text-3xl sm:text-4xl uppercase text-white tracking-tight">
+              {language === 'fr' 
+                ? 'Planifier votre appel découverte'
+                : 'Schedule your discovery call'
+              }
+            </h1>
+          </div>
 
           {/* Calendly widget container */}
-          <div className="flex-1 bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl p-2 sm:p-4 lg:p-8">
+          <div className="flex-1 bg-[#0e0e13] border border-white/10 rounded-2xl shadow-2xl p-2 sm:p-6 lg:p-8">
             <div className="w-full h-full">
               {/* Début de widget en ligne Calendly */}
               <div
-                className="calendly-inline-widget w-full"
+                className="calendly-inline-widget w-full rounded-xl overflow-hidden"
                 data-url="https://calendly.com/jesseogoula/appel-de-decouverte"
                 style={{ minWidth: '320px', height: '700px' }}
               ></div>

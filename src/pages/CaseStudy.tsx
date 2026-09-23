@@ -83,17 +83,17 @@ const CaseStudy = () => {
   }
 
   return (
-    <div className="min-h-screen bg-light-100">
+    <div className="min-h-screen bg-[#08080a] text-white">
       <Navigation />
       
-      <main className="pt-20">
+      <main className="pt-24 pb-16">
         {/* Hero Section */}
-        <section className="py-16 bg-white">
+        <section className="py-16 border-b border-white/10">
           <div className="container mx-auto px-4 lg:px-8">
             <Button
               variant="outline"
               onClick={() => navigate('/')}
-              className="mb-8 border-navy-800 text-navy-800 hover:bg-navy-800 hover:text-white"
+              className="mb-8 border-white/20 bg-white/5 hover:bg-white/10 text-white rounded-full font-space text-xs uppercase tracking-wider"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               {language === 'fr' ? 'Retour aux projets' : 'Back to projects'}
@@ -102,30 +102,30 @@ const CaseStudy = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="mb-4">
-                  <span className="bg-primary text-white px-3 py-1 rounded-full text-sm font-inter font-medium">
+                  <span className="bg-primary/20 border border-primary/30 text-primary px-3 py-1 rounded-full text-xs font-space uppercase">
                     {caseStudy.category}
                   </span>
                 </div>
-                <h1 className="font-poppins font-bold text-4xl lg:text-5xl text-navy-800 mb-6">
+                <h1 className="font-syne font-extrabold text-4xl lg:text-5xl text-white uppercase tracking-tight mb-6">
                   {caseStudy.title}
                 </h1>
-                <div className="flex items-center space-x-6 text-gray-600 font-inter mb-6">
+                <div className="flex items-center space-x-6 text-zinc-400 font-space text-xs uppercase mb-6">
                   <div className="flex items-center">
-                    <Calendar className="w-5 h-5 mr-2" />
+                    <Calendar className="w-4 h-4 mr-2 text-primary" />
                     {caseStudy.duration}
                   </div>
                   <div className="flex items-center">
-                    <Target className="w-5 h-5 mr-2" />
+                    <Target className="w-4 h-4 mr-2 text-primary" />
                     {caseStudy.client}
                   </div>
                 </div>
               </div>
               
-              <div className="relative">
+              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 <img
                   src={caseStudy.image}
                   alt={caseStudy.title}
-                  className="w-full rounded-2xl shadow-2xl"
+                  className="w-full h-auto object-cover filter contrast-110"
                 />
               </div>
             </div>
@@ -133,51 +133,47 @@ const CaseStudy = () => {
         </section>
 
         {/* Challenge & Solution */}
-        <section className="py-16">
+        <section className="py-16 border-b border-white/10">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12">
-              <Card className="border-0 shadow-xl">
-                <CardContent className="p-8">
-                  <h2 className="font-poppins font-semibold text-2xl text-navy-800 mb-6">
-                    {language === 'fr' ? 'Le Défi' : 'The Challenge'}
-                  </h2>
-                  <p className="font-inter text-gray-600 leading-relaxed">
-                    {caseStudy.challenge}
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="p-8 rounded-2xl bg-[#0e0e13] border border-white/10 shadow-xl">
+                <h2 className="font-syne font-bold text-2xl text-white uppercase mb-4">
+                  {language === 'fr' ? 'Le Défi' : 'The Challenge'}
+                </h2>
+                <p className="font-inter text-zinc-300 leading-relaxed text-sm sm:text-base">
+                  {caseStudy.challenge}
+                </p>
+              </div>
               
-              <Card className="border-0 shadow-xl bg-primary/5">
-                <CardContent className="p-8">
-                  <h2 className="font-poppins font-semibold text-2xl text-navy-800 mb-6">
-                    {language === 'fr' ? 'La Solution' : 'The Solution'}
-                  </h2>
-                  <p className="font-inter text-gray-600 leading-relaxed">
-                    {caseStudy.solution}
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="p-8 rounded-2xl bg-[#0e0e13] border border-primary/20 shadow-xl">
+                <h2 className="font-syne font-bold text-2xl text-primary uppercase mb-4">
+                  {language === 'fr' ? 'La Solution' : 'The Solution'}
+                </h2>
+                <p className="font-inter text-zinc-300 leading-relaxed text-sm sm:text-base">
+                  {caseStudy.solution}
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Results */}
-        <section className="py-16 bg-white">
+        <section className="py-16 border-b border-white/10">
           <div className="container mx-auto px-4 lg:px-8">
-            <h2 className="font-poppins font-bold text-3xl text-navy-800 text-center mb-12">
+            <h2 className="font-syne font-bold text-3xl text-white uppercase text-center mb-12">
               {language === 'fr' ? 'Résultats Obtenus' : 'Results Achieved'}
             </h2>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
               {caseStudy.results.map((result, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <TrendingUp className="w-8 h-8 text-primary" />
+                <div key={index} className="p-6 rounded-xl bg-[#0f0f14] border border-white/10 text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                    <TrendingUp className="w-6 h-6 text-primary" />
                   </div>
-                  <div className="font-poppins font-bold text-3xl text-primary mb-2">
+                  <div className="font-syne font-bold text-3xl text-white mb-1">
                     {result.value}
                   </div>
-                  <div className="font-inter text-gray-600">
+                  <div className="font-space text-xs text-zinc-400 uppercase">
                     {result.metric}
                   </div>
                 </div>
@@ -187,55 +183,29 @@ const CaseStudy = () => {
         </section>
 
         {/* Timeline */}
-        <section className="py-16">
+        <section className="py-16 border-b border-white/10">
           <div className="container mx-auto px-4 lg:px-8">
-            <h2 className="font-poppins font-bold text-3xl text-navy-800 text-center mb-12">
+            <h2 className="font-syne font-bold text-3xl text-white uppercase text-center mb-12">
               {language === 'fr' ? 'Timeline du Projet' : 'Project Timeline'}
             </h2>
             
-            <div className="max-w-4xl mx-auto">
-              <div className="space-y-6">
-                {caseStudy.timeline.map((phase, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-poppins font-semibold mr-6">
-                      {index + 1}
-                    </div>
-                    <div className="flex-1 bg-white p-6 rounded-xl shadow-lg">
-                      <h3 className="font-poppins font-semibold text-lg text-navy-800 mb-2">
-                        {phase.phase}
-                      </h3>
-                      <p className="font-inter text-gray-600">
-                        {phase.duration}
-                      </p>
-                    </div>
+            <div className="max-w-3xl mx-auto space-y-4">
+              {caseStudy.timeline.map((phase, index) => (
+                <div key={index} className="flex items-center gap-4 p-4 rounded-xl bg-[#0e0e13] border border-white/10">
+                  <div className="w-10 h-10 bg-primary/20 text-primary border border-primary/30 rounded-lg flex items-center justify-center font-space font-bold text-sm flex-shrink-0">
+                    0{index + 1}
                   </div>
-                ))}
-              </div>
+                  <div className="flex-1 flex justify-between items-center">
+                    <h3 className="font-syne font-bold text-base text-white uppercase">
+                      {phase.phase}
+                    </h3>
+                    <span className="font-space text-xs text-zinc-400">
+                      {phase.duration}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="py-16 bg-navy-800">
-          <div className="container mx-auto px-4 lg:px-8 text-center">
-            <h2 className="font-poppins font-bold text-3xl text-white mb-6">
-              {language === 'fr' 
-                ? 'Prêt à transformer votre projet ?'
-                : 'Ready to transform your project?'
-              }
-            </h2>
-            <p className="font-inter text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              {language === 'fr'
-                ? 'Discutons de votre vision et créons ensemble votre succès'
-                : 'Let\'s discuss your vision and create your success together'
-              }
-            </p>
-            <Button
-              onClick={() => navigate('/#contact')}
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-4 font-inter font-medium text-lg"
-            >
-              {language === 'fr' ? 'Démarrer un projet' : 'Start a project'}
-            </Button>
           </div>
         </section>
       </main>

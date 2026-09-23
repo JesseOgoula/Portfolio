@@ -1,5 +1,5 @@
-
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -20,30 +20,18 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'poppins': ['Poppins', 'sans-serif'],
-				'inter': ['Inter', 'sans-serif'],
+				sans: ['"Inter Tight"', 'Helvetica Neue', 'Arial', 'sans-serif'],
+				mono: ['"JetBrains Mono"', 'monospace'],
+				space: ['"Space Grotesk"', 'sans-serif'],
 			},
 			colors: {
-				// École 241 inspired palette
-				primary: {
-					DEFAULT: '#E63946',
-					50: '#FEF2F2',
-					100: '#FEE2E2',
-					500: '#E63946',
-					600: '#DC2626',
-					700: '#B91C1C',
-				},
-				navy: {
-					DEFAULT: '#1D3557',
-					50: '#F8FAFC',
-					100: '#F1F5F9',
-					800: '#1D3557',
-					900: '#0F172A',
-				},
-				light: {
-					DEFAULT: '#F1FAEE',
-					50: '#F8FAFC',
-					100: '#F1FAEE',
+				mono: {
+					bg: '#050505',
+					secondary: '#0B0B0B',
+					dark: '#151515',
+					gray: '#3A3A3A',
+					light: '#B5B5B5',
+					white: '#F4F4F4',
 				},
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -131,5 +119,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 } satisfies Config;
