@@ -10,7 +10,6 @@ import CertificationsSection from '@/components/CertificationsSection';
 import SecondVisualHero from '@/components/SecondVisualHero';
 import FinalCTA from '@/components/FinalCTA';
 import BrutalistFooter from '@/components/BrutalistFooter';
-import VisualEditor from '@/components/VisualEditor';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
@@ -83,9 +82,6 @@ const Index = () => {
         >
           <BrutalistFooter />
         </div>
-
-        {/* In-Browser Visual Editor Tool */}
-        <VisualEditor />
       </div>
     </SmoothScroll>
   );

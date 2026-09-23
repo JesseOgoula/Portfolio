@@ -19,7 +19,7 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     projectType: 'ai-automation',
     description: '',
     preferredDate: '',
-    preferredTime: 'morning',
+    preferredTime: '10:00',
     channel: 'google-meet',
   });
 
@@ -78,13 +78,35 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
   ];
 
   const timeSlots = language === 'fr' ? [
-    { id: 'morning', label: 'Matinée (09h – 12h)' },
-    { id: 'afternoon', label: 'Après-midi (14h – 17h)' },
-    { id: 'evening', label: 'Fin de journée (17h – 19h)' },
+    { id: '09:00', label: '09h00 – 09h30' },
+    { id: '09:30', label: '09h30 – 10h00' },
+    { id: '10:00', label: '10h00 – 10h30' },
+    { id: '10:30', label: '10h30 – 11h00' },
+    { id: '11:00', label: '11h00 – 11h30' },
+    { id: '11:30', label: '11h30 – 12h00' },
+    { id: '14:00', label: '14h00 – 14h30' },
+    { id: '14:30', label: '14h30 – 15h00' },
+    { id: '15:00', label: '15h00 – 15h30' },
+    { id: '15:30', label: '15h30 – 16h00' },
+    { id: '16:00', label: '16h00 – 16h30' },
+    { id: '16:30', label: '16h30 – 17h00' },
+    { id: '17:00', label: '17h00 – 17h30' },
+    { id: '17:30', label: '17h30 – 18h00' },
   ] : [
-    { id: 'morning', label: 'Morning (09:00 – 12:00)' },
-    { id: 'afternoon', label: 'Afternoon (14:00 – 17:00)' },
-    { id: 'evening', label: 'Late Day (17:00 – 19:00)' },
+    { id: '09:00', label: '09:00 AM – 09:30 AM' },
+    { id: '09:30', label: '09:30 AM – 10:00 AM' },
+    { id: '10:00', label: '10:00 AM – 10:30 AM' },
+    { id: '10:30', label: '10:30 AM – 11:00 AM' },
+    { id: '11:00', label: '11:00 AM – 11:30 AM' },
+    { id: '11:30', label: '11:30 AM – 12:00 PM' },
+    { id: '14:00', label: '02:00 PM – 02:30 PM' },
+    { id: '14:30', label: '02:30 PM – 03:00 PM' },
+    { id: '15:00', label: '03:00 PM – 03:30 PM' },
+    { id: '15:30', label: '03:30 PM – 04:00 PM' },
+    { id: '16:00', label: '04:00 PM – 04:30 PM' },
+    { id: '16:30', label: '04:30 PM – 05:00 PM' },
+    { id: '17:00', label: '05:00 PM – 05:30 PM' },
+    { id: '17:30', label: '05:30 PM – 06:00 PM' },
   ];
 
   const channels = [
@@ -155,67 +177,63 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
       dateStr = tomorrow.toISOString().split('T')[0];
     }
 
-    let startH = 10;
-    let endH = 10;
-    let startM = 0;
-    let endM = 30;
+    // Heure précise sélectionnée (ex: "14:30" ou "10:00")
+    const timeParts = (formData.preferredTime || '10:00').split(':');
+    const startH = timeParts.length >= 2 ? parseInt(timeParts[0], 10) : 10;
+    const startM = timeParts.length >= 2 ? parseInt(timeParts[1], 10) : 0;
 
-    if (formData.preferredTime === 'afternoon') {
-      startH = 15;
-      endH = 15;
-      startM = 0;
-      endM = 30;
-    } else if (formData.preferredTime === 'evening') {
-      startH = 17;
-      endH = 17;
-      startM = 30;
-      endM = 60;
-    }
+    // Calcul de l'heure de fin : exactement 30 minutes après
+    const startTotalMinutes = startH * 60 + startM;
+    const endTotalMinutes = startTotalMinutes + 30;
+    const endH = Math.floor(endTotalMinutes / 60);
+    const endM = endTotalMinutes % 60;
 
     const cleanDate = dateStr.replace(/-/g, '');
     const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
-    const finalEndH = endM === 60 ? startH + 1 : endH;
-    const finalEndM = endM === 60 ? 0 : endM;
-    const dates = `${cleanDate}T${pad(startH)}${pad(startM)}00/${cleanDate}T${pad(finalEndH)}${pad(finalEndM)}00`;
+    const dates = `${cleanDate}T${pad(startH)}${pad(startM)}00/${cleanDate}T${pad(endH)}${pad(endM)}00`;
 
     const details = encodeURIComponent(
       language === 'fr'
-        ? `Rendez-vous de cadrage stratégique de 30 minutes avec Jesse Ogoula.\n\n` +
-          `🎯 OBJECTIF DE LA SESSION (30 MIN) :\n` +
+        ? `Rendez-vous de cadrage stratégique (30 min) avec Jesse Ogoula.\n\n` +
+          `// OBJECTIF DE LA SESSION (30 MIN) :\n` +
           `Faire le point sur vos enjeux, diagnostiquer vos goulots d'étranglement opérationnels et identifier les opportunités concrètes pour votre projet (${selectedTypeLabel}).\n\n` +
-          `📋 DÉTAIL DU PROJET TRANSMIS :\n` +
+          `// HORAIRE CONVENU :\n` +
+          `${getFormattedDisplayDate()} de ${pad(startH)}h${pad(startM)} à ${pad(endH)}h${pad(endM)} (Heure du Gabon / WAT - UTC+1)\n\n` +
+          `// DÉTAIL DU PROJET TRANSMIS :\n` +
           `"${formData.description}"\n\n` +
-          `📍 FORMAT & CANAL :\n` +
+          `// FORMAT & CANAL :\n` +
           `${selectedChannelLabel}${formData.channel === 'google-meet' ? ' (Visioconférence Google Meet)' : ''}\n\n` +
-          `👤 VOTRE INTERVENANT :\n` +
+          `// VOTRE INTERVENANT :\n` +
           `Jesse Ogoula — AI & Digital Transformation Lead\n` +
           `• Email : adirignoogoula@gmail.com\n` +
           `• Téléphone / WhatsApp : +241 077 61 75 69 / +241 066 19 57 86\n` +
           `• Portfolio : https://www.ogoulajesse.pro\n\n` +
-          `👤 VOS COORDONNÉES ENREGISTRÉES :\n` +
+          `// VOS COORDONNÉES ENREGISTRÉES :\n` +
           `• Nom : ${formData.name}\n` +
           (formData.company ? `• Entreprise : ${formData.company}\n` : '') +
           (formData.email ? `• Email : ${formData.email}\n` : '') +
           (formData.phone ? `• Téléphone / WhatsApp : ${formData.phone}\n` : '') +
-          `\n💡 Pensez à vous connecter 2 minutes avant l'heure prévue pour démarrer à l'heure.`
+          `\nNOTE : Merci de vous connecter 2 minutes avant l'heure convenue pour démarrer à l'heure.`
         : `30-minute Strategic Discovery Session with Jesse Ogoula.\n\n` +
-          `🎯 SESSION OBJECTIVE (30 MIN):\n` +
+          `// SESSION OBJECTIVE (30 MIN):\n` +
           `Assess your opportunities, identify operational bottlenecks, and outline actionable next steps for your project (${selectedTypeLabel}).\n\n` +
-          `📋 YOUR PROJECT BRIEF:\n` +
+          `// SCHEDULED TIME:\n` +
+          `${getFormattedDisplayDate()} from ${pad(startH)}:${pad(startM)} to ${pad(endH)}:${pad(endM)} (WAT / UTC+1)\n\n` +
+          `// YOUR PROJECT BRIEF:\n` +
           `"${formData.description}"\n\n` +
-          `📍 MEETING FORMAT:\n` +
+          `// MEETING FORMAT:\n` +
           `${selectedChannelLabel}${formData.channel === 'google-meet' ? ' (Google Meet Video Call)' : ''}\n\n` +
-          `👤 HOST:\n` +
+          `// HOST:\n` +
           `Jesse Ogoula — AI & Digital Transformation Lead\n` +
           `• Email: adirignoogoula@gmail.com\n` +
           `• Phone / WhatsApp: +241 077 61 75 69 / +241 066 19 57 86\n` +
           `• Website: https://www.ogoulajesse.pro\n\n` +
-          `👤 YOUR CONTACT DETAILS:\n` +
+          `// YOUR CONTACT DETAILS:\n` +
           `• Name: ${formData.name}\n` +
           (formData.company ? `• Company: ${formData.company}\n` : '') +
           (formData.email ? `• Email: ${formData.email}\n` : '') +
           (formData.phone ? `• Phone / WhatsApp: ${formData.phone}\n` : '') +
-          `\n💡 Please connect 2 minutes before the scheduled time to optimize the session.`
+          `\nNOTE: Please connect 2 minutes before the scheduled time to optimize the session.`
     );
 
     const location = encodeURIComponent(
@@ -339,9 +357,9 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
         {isSubmitted ? (
           /* Redesigned Confirmation View — Client Centric with Google Calendar Reminder */
           <div className="py-2 sm:py-4 space-y-6 text-center">
-            {/* Success Pill */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1b2a1e] border border-[#2d5236] text-[#4ade80] font-mono text-[10px] tracking-widest uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4ade80] animate-pulse" />
+            {/* Success Pill — Sober White Monochromatic */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/20 text-[#F4F4F4] font-mono text-[10px] tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-white" />
               <span>{language === 'fr' ? '// DEMANDE ENREGISTRÉE AVEC SUCCÈS' : '// REQUEST CONFIRMED'}</span>
             </div>
 
@@ -363,8 +381,8 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
                 <span className="font-mono text-[10px] uppercase tracking-wider text-[#888]">
                   {language === 'fr' ? '// FICHE DE RENDEZ-VOUS' : '// SESSION BRIEFING'}
                 </span>
-                <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-white/10 text-white border border-white/10">
-                  ⏱️ 30 MIN
+                <span className="font-mono text-[10px] font-bold px-2.5 py-0.5 rounded bg-white/10 text-white border border-white/10 tracking-wider">
+                  30 MIN
                 </span>
               </div>
 
@@ -396,10 +414,10 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
 
                 <div className="sm:col-span-2 pt-2 hairline-t">
                   <span className="font-mono text-[9px] uppercase tracking-wider text-[#666] block mb-1">
-                    {language === 'fr' ? 'Date & Créneau prévus' : 'Scheduled Date & Time'}
+                    {language === 'fr' ? 'Date & Heure précises' : 'Scheduled Date & Exact Time'}
                   </span>
                   <div className="font-semibold text-white flex items-center gap-2">
-                    <CalendarIcon className="w-3.5 h-3.5 text-[#a45252]" />
+                    <CalendarIcon className="w-3.5 h-3.5 text-[#B5B5B5]" />
                     <span>{getFormattedDisplayDate()} — {selectedTimeLabel}</span>
                   </div>
                 </div>
@@ -429,8 +447,8 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
 
               <p className="font-mono text-[10px] text-[#777] max-w-md mx-auto leading-relaxed">
                 {language === 'fr'
-                  ? '⚡ Enregistre la session dans votre calendrier avec le sujet, le créneau et le rappel automatique.'
-                  : '⚡ Saves the session into your calendar with full briefing notes and automatic reminder.'}
+                  ? 'Enregistre la session dans votre calendrier avec le sujet, l’horaire précis et le rappel automatique.'
+                  : 'Saves the session into your calendar with full briefing notes and automatic reminder.'}
               </p>
             </div>
 
@@ -578,10 +596,12 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
                 <div>
                   <label className="block font-mono text-[9px] tracking-wider uppercase text-[#B5B5B5] mb-1">
-                    {language === 'fr' ? 'Date souhaitée' : 'Preferred Date'}
+                    {language === 'fr' ? 'Date souhaitée *' : 'Preferred Date *'}
                   </label>
                   <input
                     type="date"
+                    required
+                    min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
                     value={formData.preferredDate}
                     onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
                     className="w-full bg-[#131318] border border-white/10 focus:border-[#a45252] text-white font-mono text-xs px-2.5 py-2 rounded-lg outline-none"
@@ -590,7 +610,7 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
 
                 <div>
                   <label className="block font-mono text-[9px] tracking-wider uppercase text-[#B5B5B5] mb-1">
-                    {language === 'fr' ? 'Créneau' : 'Time Window'}
+                    {language === 'fr' ? 'Heure précise (30 min) *' : 'Exact Time (30 min) *'}
                   </label>
                   <select
                     value={formData.preferredTime}
