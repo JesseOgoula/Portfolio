@@ -69,8 +69,8 @@ const Schedule = () => {
             </span>
             <h1 className="font-syne font-extrabold text-3xl sm:text-4xl uppercase text-white tracking-tight">
               {language === 'fr' 
-                ? 'Planifier votre appel découverte'
-                : 'Schedule your discovery call'
+                ? 'Échangeons sur votre projet'
+                : "Let's discuss your project"
               }
             </h1>
           </div>

@@ -58,12 +58,31 @@ const services: ServiceItem[] = [
     },
   },
   {
+    id: 'ai-automation',
+    name: {
+      fr: 'IA & AUTOMATISATION',
+      en: 'AI & AUTOMATION',
+    },
+    num: '03',
+    count: { fr: '15+ WORKFLOWS', en: '15+ WORKFLOWS' },
+    leftPreview: {
+      title: 'AGENTS & WORKFLOWS IA',
+      caption: { fr: 'AUTOMATISATION DE PROCESSUS MÉTIER & LLM', en: 'LLM INTEGRATION & SMART AGENTS' },
+      image: '/Sikaapp.jpeg',
+    },
+    rightPreview: {
+      title: 'INFRASTRUCTURE INTELLIGENTE',
+      caption: { fr: 'PIPELINES D’AUTOMATISATION & IA GÉNÉRATIVE', en: 'GENERATIVE AI & SMART PIPELINES' },
+      image: '/banners/AFRICAKARD.png',
+    },
+  },
+  {
     id: 'digital-ai-training',
     name: {
       fr: 'PÉDAGOGIE ACTIVE & FORMATION IA',
       en: 'DIGITAL & AI TRAINING',
     },
-    num: '03',
+    num: '04',
     count: { fr: '200+ TALENTS', en: '200+ TALENTS' },
     leftPreview: {
       title: 'PÉDAGOGIE ACTIVE SIMPLON',
@@ -82,7 +101,7 @@ const services: ServiceItem[] = [
       fr: 'CONCEPTION WEB & PORTAILS',
       en: 'WEB ARCHITECTURE & PLATFORMS',
     },
-    num: '04',
+    num: '05',
     count: { fr: '12 PORTAILS', en: '12 PLATFORMS' },
     leftPreview: {
       title: 'PORTAIL FÉDÉRAL FGTT',
@@ -101,7 +120,7 @@ const services: ServiceItem[] = [
       fr: 'DESIGN SYSTEMS & IDENTITÉ DE MARQUE',
       en: 'ART DIRECTION & DESIGN SYSTEM',
     },
-    num: '05',
+    num: '06',
     count: { fr: '15 IDENTITÉS', en: '15 IDENTITIES' },
     leftPreview: {
       title: 'BIBLIOTHÈQUE DE COMPOSANTS',
@@ -167,6 +186,16 @@ const ServicesCategories = () => {
                 <img
                   src={current.leftPreview.image}
                   alt={current.leftPreview.title}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('AFRICAKARD') && !target.src.includes('africakard.png')) {
+                      target.src = '/africakard.png';
+                    } else if (target.src.includes('Ecole241') && !target.src.includes('ecole241.jpg')) {
+                      target.src = '/ecole241.jpg';
+                    } else if (target.src.includes('DECLIC') && !target.src.includes('declic.jpg')) {
+                      target.src = '/declic.jpg';
+                    }
+                  }}
                   className="w-full h-full object-cover filter grayscale contrast-125 hover:contrast-150 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
@@ -249,6 +278,16 @@ const ServicesCategories = () => {
                 <img
                   src={current.rightPreview.image}
                   alt={current.rightPreview.title}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('AFRICAKARD') && !target.src.includes('africakard.png')) {
+                      target.src = '/africakard.png';
+                    } else if (target.src.includes('Ecole241') && !target.src.includes('ecole241.jpg')) {
+                      target.src = '/ecole241.jpg';
+                    } else if (target.src.includes('DECLIC') && !target.src.includes('declic.jpg')) {
+                      target.src = '/declic.jpg';
+                    }
+                  }}
                   className="w-full h-full object-cover filter grayscale contrast-125 hover:contrast-150 transition-all duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />

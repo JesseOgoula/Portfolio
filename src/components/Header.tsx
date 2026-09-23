@@ -24,15 +24,17 @@ const Header = () => {
     { id: 'featured', label: 'ÉTUDES DE CAS' },
     { id: 'services', label: 'EXPERTISES' },
     { id: 'archive', label: 'COLLABORATIONS' },
+    { id: 'certifications', label: 'CERTIFICATIONS' },
     { id: 'contact', label: 'CONTACT' },
   ] : [
     { id: 'featured', label: 'FEATURED' },
     { id: 'services', label: 'SERVICES' },
     { id: 'archive', label: 'ARCHIVE' },
+    { id: 'certifications', label: 'CERTIFICATIONS' },
     { id: 'contact', label: 'CONTACT' },
   ];
 
-  const cvUrl = language === 'fr' ? '/Cv/CVjesse - French.pdf' : '/Cv/CVjesse - English.pdf';
+  const cvUrl = language === 'fr' ? '/Cv/CV_Jesse_Ogoula.pdf' : '/Cv/CV_Jesse_Ogoula_EN.pdf';
 
   return (
     <header

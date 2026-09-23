@@ -16,7 +16,7 @@ describe('Schedule', () => {
         <Schedule />
       </LanguageContext.Provider>
     );
-    expect(screen.getByText(/Planifier votre appel découverte/i)).toBeInTheDocument();
+    expect(screen.getByText(/Échangeons sur votre projet/i)).toBeInTheDocument();
   });
 
   it('affiche le titre en anglais', () => {
@@ -32,6 +32,6 @@ describe('Schedule', () => {
         <Schedule />
       </LanguageContext.Provider>
     );
-    expect(screen.getByText(/Schedule your discovery call/i)).toBeInTheDocument();
+    expect(screen.getByText(/Let's discuss your project/i)).toBeInTheDocument();
   });
 });

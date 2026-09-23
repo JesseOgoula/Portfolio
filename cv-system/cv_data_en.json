@@ -1,0 +1,109 @@
+{
+  "lang": "en",
+  "nom": "JESSE OGOULA",
+  "titre": "AI & DIGITAL TRANSFORMATION LEAD | PRODUCT & OPERATIONS",
+  "photo_path": "assets/portrait_framed.jpg",
+  "profil": "Gabonese professional at the crossroads of digital transformation, product management, and applied artificial intelligence. Since 2022, I have been supporting SMEs, institutions, and entrepreneurs across Francophone Africa in scaling digital capabilities: operational bottleneck diagnosis, deployment of AI assistants and no-code/low-code automations, and execution of high-impact training initiatives with over 600 talents trained in partnership with OIF, Ecole 241. Rigorous, results-oriented, and thriving in multicultural environments. Available for: Permanent roles, strategic missions, senior consulting Based in Gabon, mobility & remote friendly.",
+  "disponibilite": "Permanent roles · Strategic missions · Senior consulting — Mobility & Remote friendly",
+  "contact": {
+    "localisation": "Port-Gentil, Ogooué-Maritime, Gabon",
+    "telephone": "+241 066 19 57 86 / +241 077 61 75 69",
+    "email": "adirignoogoula@gmail.com",
+    "linkedin": "linkedin.com/in/ogoulajesse",
+    "site_web": "www.ogoulajesse.pro"
+  },
+  "competences_flat": [
+    "Digital Transformation & AI",
+    "LLM Deployment (OpenAI, Claude)",
+    "Make & n8n Workflow Automation",
+    "Prompt Engineering (PIQPACC)",
+    "Product Management & Agile",
+    "Business Process Mapping",
+    "Digital Marketing & Growth",
+    "Traffic Management & SEO/SEA",
+    "No-code & Low-code Tools",
+    "Organizational Change Management"
+  ],
+  "langues": [
+    { "nom": "French", "niveau": "Native proficiency" },
+    { "nom": "English", "niveau": "Professional / Technical" }
+  ],
+  "formations": [
+    {
+      "ecole": "OMAR BONGO UNIVERSITY",
+      "diplome": "Bachelor's Degree in Law",
+      "periode": "2011",
+      "lieu": "Libreville, Gabon"
+    },
+    {
+      "ecole": "DELTA HIGH SCHOOL",
+      "diplome": "High School Baccalaureate",
+      "periode": "2011",
+      "lieu": "Port-Gentil, Gabon"
+    }
+  ],
+  "certifications": [
+    {
+      "titre": "Active Pedagogy",
+      "emetteur": "Simplon Africa · May 2024"
+    },
+    {
+      "titre": "Product Management",
+      "emetteur": "Ecole 241 / Simplon / D-CLIC · 2022"
+    },
+    {
+      "titre": "Management with AI",
+      "emetteur": "Professional Certifications · 2024-2025"
+    }
+  ],
+  "experiences_4": [
+    {
+      "poste": "LEAD CONSULTANT AI & DIGITAL TRANSFORMATION (CO-FOUNDER)",
+      "entreprise": "Iboga Lab",
+      "lieu": "Ogooué-Maritime, Gabon",
+      "periode": "June 2025 – Present",
+      "bullets": [
+        "Led consulting engagements in applied AI, process digitalization, and capability building for enterprises and institutions.",
+        "Conducted AI opportunity audits to identify operational bottlenecks and design end-to-end automation roadmaps.",
+        "Engineered no-code/low-code architectures (Make, n8n, APIs) and custom AI assistants, significantly reducing task execution time.",
+        "Advised 20+ businesses and venture projects (B2B/B2C), driving an average +35% increase in qualified inbound traffic."
+      ]
+    },
+    {
+      "poste": "EXPERT TRAINER — DIGITAL MARKETING",
+      "entreprise": "International Organisation of La Francophonie (OIF)",
+      "lieu": "Francophone Space",
+      "periode": "May 2025 – Present",
+      "bullets": [
+        "Spearheaded educational delivery for the D-CLIC programme to equip Francophone youth with high-value digital skills.",
+        "Mentored and guided 500+ learners on the D-CLIC Moodle platform across the Francophone space.",
+        "Conducted interactive case-based mentoring sessions with personalized employability coaching.",
+        "Developed grading frameworks, validated capstone projects (digital strategy, AI toolsets), and resolved technical blockers."
+      ]
+    },
+    {
+      "poste": "COACH & TRAINER — DIGITAL MARKETING & AI",
+      "entreprise": "Ogooué Labs",
+      "lieu": "Port-Gentil, Gabon",
+      "periode": "April 2024 – July 2025",
+      "bullets": [
+        "Mentored 2 learner cohorts in digital marketing: digital strategy, SEO, Social Ads, and community growth.",
+        "Led hands-on workshops on modern digital tooling, no-code workflows, and applied artificial intelligence.",
+        "Delivered individualised coaching, hands-on portfolio projects, and collaborative team assignments.",
+        "Outcomes: 75% professional placement rate and 92% student satisfaction score."
+      ]
+    },
+    {
+      "poste": "PRODUCT MANAGER & DIGITAL STRATEGIST",
+      "entreprise": "Petit Marché Gabon & Ecole 241",
+      "lieu": "Gabon",
+      "periode": "March 2022 – March 2023",
+      "bullets": [
+        "Managed product strategy for Africakard prepaid cards, launching new offerings that grew monthly revenue by +15%.",
+        "Directed performance digital marketing campaigns to scale brand visibility, acquisition, and conversion rates (Social Ads / SEO).",
+        "Formulated content strategy, analyzed campaign performance, and coordinated a cross-functional team of 4 designers.",
+        "Prior background: Logistics Coordinator at Daron Group (7 years) · Team Lead at Port-Gentil Municipality."
+      ]
+    }
+  ]
+}

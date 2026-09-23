@@ -9,7 +9,7 @@ const BrutalistFooter: React.FC = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const cvUrl = language === 'fr' ? '/Cv/CVjesse - French.pdf' : '/Cv/CVjesse - English.pdf';
+  const cvUrl = language === 'fr' ? '/Cv/CV_Jesse_Ogoula.pdf' : '/Cv/CV_Jesse_Ogoula_EN.pdf';
 
   return (
     <footer className="relative bg-[#050505] text-[#F4F4F4] pt-10 sm:pt-14 overflow-hidden select-none">
@@ -77,6 +77,14 @@ const BrutalistFooter: React.FC = () => {
                   className="hover:text-white transition-colors"
                 >
                   {language === 'fr' ? 'COLLABORATIONS' : 'COLLABORATIONS'}
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTo('certifications')}
+                  className="hover:text-white transition-colors"
+                >
+                  {language === 'fr' ? 'CERTIFICATIONS' : 'CERTIFICATIONS'}
                 </button>
               </li>
               <li>

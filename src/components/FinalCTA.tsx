@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import ProjectMeetingModal from '@/components/ProjectMeetingModal';
 
 const FinalCTA: React.FC = () => {
   const { language } = useLanguage();
-  const cvUrl = language === 'fr' ? '/Cv/CVjesse - French.pdf' : '/Cv/CVjesse - English.pdf';
+  const [isMeetingModalOpen, setIsMeetingModalOpen] = useState(false);
+  const cvUrl = language === 'fr' ? '/Cv/CV_Jesse_Ogoula.pdf' : '/Cv/CV_Jesse_Ogoula_EN.pdf';
 
   return (
     <section
@@ -55,13 +57,13 @@ const FinalCTA: React.FC = () => {
 
         {/* Action Buttons & Links */}
         <div className="flex flex-wrap items-center gap-6 sm:gap-8 mb-16 sm:mb-20">
-          <a
-            href="mailto:contact@ogoulajesse.pro"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#F4F4F4] text-[#050505] font-mono text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#E0E0E0] transition-colors"
+          <button
+            onClick={() => setIsMeetingModalOpen(true)}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#F4F4F4] text-[#050505] font-mono text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#E0E0E0] transition-all cursor-pointer group hover:scale-[1.02]"
           >
-            <span>{language === 'fr' ? 'ÉCHANGER SUR VOTRE PROJET' : 'START A PROJECT'}</span>
-            <span>→</span>
-          </a>
+            <span>{language === 'fr' ? 'ÉCHANGEONS SUR VOTRE PROJET' : "LET'S DISCUSS YOUR PROJECT"}</span>
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </button>
 
           <a
             href={cvUrl}
@@ -105,7 +107,7 @@ const FinalCTA: React.FC = () => {
               +241 066 19 57 86
             </a>
             <span className="text-[#888] block text-[9px] mt-0.5">
-              +241 077 91 75 69
+              +241 077 61 75 69
             </span>
           </div>
 
@@ -133,6 +135,12 @@ const FinalCTA: React.FC = () => {
         </div>
 
       </div>
+
+      {/* Interactive Project Discovery Meeting Booking Modal */}
+      <ProjectMeetingModal
+        isOpen={isMeetingModalOpen}
+        onClose={() => setIsMeetingModalOpen(false)}
+      />
     </section>
   );
 };

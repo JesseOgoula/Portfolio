@@ -33,35 +33,29 @@ const BrutalistHero = () => {
             <span className="w-1.5 h-1.5 bg-[#F4F4F4]" />
             <span>
               {language === 'fr'
-                ? '// 01 — STRATÉGIE PRODUIT, CROISSANCE & EXPÉRIENCES DIGITALES'
-                : '// 01 — CREATIVE DIRECTION, PRODUCT STRATEGY & AI'}
+                ? '// 01 — STRATÉGIE PRODUIT, CROISSANCE, IA & EXPÉRIENCES DIGITALES'
+                : '// 01 — CREATIVE DIRECTION, PRODUCT STRATEGY, AI & DIGITAL EXPERIENCES'}
             </span>
           </div>
 
           {/* Monumental Headline */}
-          <div className="font-sans font-extrabold uppercase leading-[0.88] tracking-[-0.04em] text-[#F4F4F4] mb-8 sm:mb-12">
+          <div className="font-sans font-extrabold uppercase leading-[0.9] tracking-[-0.035em] text-[#F4F4F4] mb-8 sm:mb-12">
             {language === 'fr' ? (
               <>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[7.8rem]">
-                  DE L&apos;IDÉE
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.6rem]">
+                  L&apos;IMPACT NE S&apos;ARRÊTE <br className="hidden sm:inline" />PAS À MOI.
                 </span>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[7.8rem]">
-                  À L&apos;IMPACT
-                </span>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[7.8rem] text-[#F4F4F4]">
-                  LA STRATÉGIE.
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.6rem] text-[#F4F4F4]">
+                  IL SE TRANSMET.
                 </span>
               </>
             ) : (
               <>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[7.8rem]">
-                  FROM VISION
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.6rem]">
+                  IMPACT DOESN&apos;T STOP <br className="hidden sm:inline" />WITH ME.
                 </span>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[7.8rem]">
-                  TO IMPACT
-                </span>
-                <span className="block text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] xl:text-[7.8rem] text-[#F4F4F4]">
-                  THROUGH STRATEGY.
+                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.6rem] text-[#F4F4F4]">
+                  IT IS PASSED ON.
                 </span>
               </>
             )}
@@ -90,7 +84,7 @@ const BrutalistHero = () => {
                 DISCIPLINE 03
               </span>
               <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#B5B5B5] uppercase">
-                {language === 'fr' ? 'PÉDAGOGIE ACTIVE & IA' : 'TRAINING & AI'}
+                {language === 'fr' ? 'IA & AUTOMATISATION' : 'AI & AUTOMATION'}
               </span>
             </div>
           </div>

@@ -152,13 +152,26 @@ My mission: to turn your ideas into innovative products and to transmit the skil
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
+  isTransitioning: boolean;
   t: (key: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('fr');
+  const [language, setLanguageState] = useState<Language>('fr');
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+
+  const setLanguage = (newLang: Language) => {
+    if (newLang === language) return;
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setLanguageState(newLang);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 60);
+    }, 150);
+  };
 
   const t = (key: string): string => {
     const translation = translations[key];
@@ -170,7 +183,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, isTransitioning, t }}>
       {children}
     </LanguageContext.Provider>
   );

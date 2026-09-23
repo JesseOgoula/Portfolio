@@ -16,16 +16,15 @@ const CVDownloadModal = ({ isOpen, onClose }: CVDownloadModalProps) => {
   if (!isOpen) return null;
 
   const handleDownload = (lang: 'fr' | 'en') => {
-    // Ici, vous devrez remplacer par les vrais liens vers vos CV
     const cvLinks = {
-      fr: '/Cv/CVjesse - French.pdf',
-      en: '/Cv/CVjesse - English.pdf'
+      fr: '/Cv/CV_Jesse_Ogoula.pdf',
+      en: '/Cv/CV_Jesse_Ogoula_EN.pdf'
     };
     
     // Créer un lien temporaire pour télécharger
     const link = document.createElement('a');
     link.href = cvLinks[lang];
-    link.download = `CV-Product-Manager-${lang.toUpperCase()}.pdf`;
+    link.download = `CV_Jesse_Ogoula_${lang.toUpperCase()}.pdf`;
     link.click();
     
     onClose();

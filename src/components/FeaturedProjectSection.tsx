@@ -69,7 +69,7 @@ const projects: LocalizedProject[] = [
       fr: 'Infrastructure e-commerce dédiée à la distribution instantanée de cartes cadeaux et abonnements numériques en Afrique. Restructuration complète de la roadmap produit, fluidification du checkout et campagnes d’acquisition ayant généré +15% de CA mensuel.',
       en: 'Digital voucher platform delivering instant prepaid access and subscription distribution across Central Africa, driving +15% monthly revenue surge and funnel optimization.',
     },
-    image: '/banners/AFRICAKARD.png',
+    image: '/africakard.png',
     link: '#',
     metrics: [
       { label: { fr: 'HAUSSE MENSUELLE', en: 'REVENUE SURGE' }, value: '+15%' },
@@ -99,7 +99,7 @@ const projects: LocalizedProject[] = [
       fr: 'Pôle d’excellence numérique propulsé par Ogooué Labs. Encadrement intensif de 2 promotions et plus de 20 apprenants sur la stratégie digitale, le community management, le SEO et l’intégration pratique de l’IA. Déploiement d’une pédagogie active orientée employabilité immédiate.',
       en: 'Pioneering digital training academy powered by Ogooué Labs. Mentoring 2 cohorts and over 20 learners in digital strategy, SEO, active pedagogy, and professional employability.',
     },
-    image: '/banners/Ecole241.jpg',
+    image: '/ecole241.jpg',
     link: '#',
     metrics: [
       { label: { fr: 'PROMOTIONS', en: 'COHORTS' }, value: '2 PROMOS' },
@@ -129,7 +129,7 @@ const projects: LocalizedProject[] = [
       fr: 'Programme panafricain phare de l’OIF visant à doter la jeunesse des compétences numériques professionnalisantes. Tutorat et coaching intensif des apprenants en marketing digital, stratégie de contenu et outils collaboratifs avec une approche par projets concrets.',
       en: 'Flagship pan-African digital program by OIF empowering young talents with professional digital and marketing skills through active, project-based mentorship.',
     },
-    image: '/banners/DECLIC.jpg',
+    image: '/declic.jpg',
     link: '#',
     metrics: [
       { label: { fr: 'APPRENANTS COACHÉS', en: 'LEARNERS COACHED' }, value: '50+' },
@@ -280,8 +280,23 @@ const FeaturedProjectSection = () => {
             {/* Main Visual Frame */}
             <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] bg-[#151515] overflow-hidden border border-[#222]">
               <img
+                key={current.id}
                 src={current.image}
                 alt={current.title}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  const fallbacks: Record<string, string[]> = {
+                    africakard: ['/africakard.png', '/banners/AFRICAKARD.png', '/logos/LOGO AFRICAKARD@300x.png'],
+                    ecole241: ['/ecole241.jpg', '/banners/Ecole241.jpg', '/logos/E241 NOIR.png'],
+                    dclic: ['/declic.jpg', '/banners/DECLIC.jpg', '/logos/Logo_OIF.svg.png'],
+                    sikaapp: ['/Sikaapp.jpeg'],
+                  };
+                  const list = fallbacks[current.id] || [];
+                  const nextSrc = list.find((s) => !target.src.endsWith(s));
+                  if (nextSrc) {
+                    target.src = nextSrc;
+                  }
+                }}
                 className="w-full h-full object-cover filter grayscale contrast-125 brightness-95 group-hover:scale-105 group-hover:contrast-150 transition-all duration-700 ease-out"
               />
 

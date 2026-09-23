@@ -6,12 +6,16 @@ import Manifesto from '@/components/Manifesto';
 import FeaturedProjectSection from '@/components/FeaturedProjectSection';
 import ServicesCategories from '@/components/ServicesCategories';
 import CollaborationsAndGrid from '@/components/CollaborationsAndGrid';
+import CertificationsSection from '@/components/CertificationsSection';
 import SecondVisualHero from '@/components/SecondVisualHero';
 import FinalCTA from '@/components/FinalCTA';
 import BrutalistFooter from '@/components/BrutalistFooter';
 import VisualEditor from '@/components/VisualEditor';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Index = () => {
+  const { isTransitioning } = useLanguage();
+
   return (
     <SmoothScroll>
       <div className="min-h-screen bg-[#050505] text-[#F4F4F4] selection:bg-[#F4F4F4] selection:text-[#050505] overflow-x-hidden font-sans">
@@ -23,7 +27,11 @@ const Index = () => {
           <Header />
         </div>
 
-        <main className="flex flex-col">
+        <main
+          className={`flex flex-col transition-all duration-200 ease-out ${
+            isTransitioning ? 'opacity-25 filter blur-[0.6px]' : 'opacity-100 filter-none'
+          }`}
+        >
           {/* Section 02: Brutalist Hero with 3D Helical Filmstrip */}
           <div data-editor-id="hero" data-editor-label="Section 02 — Hero Principal">
             <BrutalistHero />
@@ -49,8 +57,13 @@ const Index = () => {
             <CollaborationsAndGrid />
           </div>
 
-          {/* Section 07 & 08: Unified Visual Hero (Editorial Statement + Borderless Portrait + Gravitating Partner Logos + 3D Ribbons) */}
-          <div data-editor-id="second-hero" data-editor-label="Section 07 & 08 — Deuxième Hero Visuel">
+          {/* Section 07: Official Accreditations & Certifications Gallery */}
+          <div data-editor-id="certifications" data-editor-label="Section 07 — Certifications & Accréditations">
+            <CertificationsSection />
+          </div>
+
+          {/* Section 08: Unified Visual Hero (Editorial Statement + Borderless Portrait + Gravitating Partner Logos + 3D Ribbons) */}
+          <div data-editor-id="second-hero" data-editor-label="Section 08 — Deuxième Hero Visuel">
             <SecondVisualHero />
           </div>
 
@@ -61,7 +74,13 @@ const Index = () => {
         </main>
 
         {/* Section 10: Brutalist Footer with Monumental Typography */}
-        <div data-editor-id="footer" data-editor-label="Section 10 — Pied de Page Brutaliste">
+        <div
+          data-editor-id="footer"
+          data-editor-label="Section 10 — Pied de Page Brutaliste"
+          className={`transition-all duration-200 ease-out ${
+            isTransitioning ? 'opacity-25 filter blur-[0.6px]' : 'opacity-100 filter-none'
+          }`}
+        >
           <BrutalistFooter />
         </div>
 
