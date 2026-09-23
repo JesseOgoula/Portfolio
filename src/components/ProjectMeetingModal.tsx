@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { X, Calendar, Video, Phone, MessageSquare, CheckCircle2, ArrowRight, ExternalLink } from 'lucide-react';
+import { X, Calendar as CalendarIcon, Video, Phone, MessageSquare, CheckCircle2, ArrowRight } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 
 interface ProjectMeetingModalProps {
@@ -38,17 +38,26 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  // Lock body scroll when open
+  // Isolate scroll: stop Lenis virtual scroll and lock background body scroll
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      if ((window as any).lenis) {
+        (window as any).lenis.stop();
+      }
     } else {
       document.body.style.overflow = '';
+      if ((window as any).lenis) {
+        (window as any).lenis.start();
+      }
       setIsSubmitted(false);
       setErrors({});
     }
     return () => {
       document.body.style.overflow = '';
+      if ((window as any).lenis) {
+        (window as any).lenis.start();
+      }
     };
   }, [isOpen]);
 
@@ -84,6 +93,10 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     { id: 'phone', label: language === 'fr' ? 'Téléphone direct' : 'Direct Phone', icon: Phone },
   ];
 
+  const selectedTypeLabel = projectTypes.find(t => t.id === formData.projectType)?.label || formData.projectType;
+  const selectedTimeLabel = timeSlots.find(t => t.id === formData.preferredTime)?.label || formData.preferredTime;
+  const selectedChannelLabel = channels.find(c => c.id === formData.channel)?.label || formData.channel;
+
   const validate = () => {
     const newErrors: Record<string, string> = {};
     if (!formData.name.trim()) {
@@ -105,29 +118,141 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     return Object.keys(newErrors).length === 0;
   };
 
+  // Génération du lien direct d'ajout à Google Calendar
+  const getGoogleCalendarUrl = () => {
+    const eventTitle = encodeURIComponent(
+      language === 'fr'
+        ? `Échange Projet : ${formData.name || 'Client'}${formData.company ? ` (${formData.company})` : ''} — ${selectedTypeLabel}`
+        : `Project Meeting: ${formData.name || 'Client'}${formData.company ? ` (${formData.company})` : ''} — ${selectedTypeLabel}`
+    );
+
+    let dateStr = formData.preferredDate;
+    if (!dateStr) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      dateStr = tomorrow.toISOString().split('T')[0];
+    }
+
+    let startH = 10;
+    let endH = 10;
+    let startM = 0;
+    let endM = 30;
+
+    if (formData.preferredTime === 'afternoon') {
+      startH = 15;
+      endH = 15;
+      startM = 0;
+      endM = 30;
+    } else if (formData.preferredTime === 'evening') {
+      startH = 17;
+      endH = 17;
+      startM = 30;
+      endM = 60;
+    }
+
+    const cleanDate = dateStr.replace(/-/g, '');
+    const pad = (n: number) => (n < 10 ? `0${n}` : `${n}`);
+    const finalEndH = endM === 60 ? startH + 1 : endH;
+    const finalEndM = endM === 60 ? 0 : endM;
+    const dates = `${cleanDate}T${pad(startH)}${pad(startM)}00/${cleanDate}T${pad(finalEndH)}${pad(finalEndM)}00`;
+
+    const details = encodeURIComponent(
+      `PROJET : ${selectedTypeLabel}\n` +
+      `CLIENT : ${formData.name}\n` +
+      (formData.company ? `SOCIÉTÉ : ${formData.company}\n` : '') +
+      `EMAIL : ${formData.email}\n` +
+      `TÉLÉPHONE / WHATSAPP : ${formData.phone}\n` +
+      `CANAL SOUHAITÉ : ${selectedChannelLabel}\n\n` +
+      `DESCRIPTION DU PROJET :\n${formData.description}\n\n` +
+      (formData.channel === 'google-meet' ? 'NOTE: Visioconférence Google Meet demandée.\n' : '')
+    );
+
+    const location = encodeURIComponent(
+      formData.channel === 'google-meet'
+        ? 'Google Meet'
+        : formData.channel === 'whatsapp'
+          ? `WhatsApp : ${formData.phone}`
+          : `Téléphone : ${formData.phone}`
+    );
+
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${dates}&details=${details}&location=${location}${formData.email ? `&add=${encodeURIComponent(formData.email)}` : ''}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
 
+    const gcalLink = getGoogleCalendarUrl();
+
+    const payload = {
+      client_name: formData.name,
+      client_email: formData.email,
+      client_phone: formData.phone,
+      company: formData.company,
+      project_type: formData.projectType,
+      project_type_label: selectedTypeLabel,
+      project_description: formData.description,
+      preferred_date: formData.preferredDate || null,
+      preferred_time: formData.preferredTime,
+      preferred_time_label: selectedTimeLabel,
+      preferred_channel: formData.channel,
+      preferred_channel_label: selectedChannelLabel,
+      is_google_meet: formData.channel === 'google-meet',
+      google_calendar_url: gcalLink,
+      language: language,
+      created_at: new Date().toISOString(),
+    };
+
+    // 1. Envoi direct par email via FormSubmit (service simple, 0 serveur, réception directe sur Gmail)
     try {
-      // Attempt saving to Supabase if table exists
-      await supabase.from('project_appointments').insert([{
-        client_name: formData.name,
-        client_email: formData.email,
-        client_phone: formData.phone,
-        company: formData.company,
-        project_type: formData.projectType,
-        project_description: formData.description,
-        preferred_date: formData.preferredDate || null,
-        preferred_time: formData.preferredTime,
-        preferred_channel: formData.channel,
-        language: language,
-        created_at: new Date().toISOString(),
-      }]);
+      await fetch('https://formsubmit.co/ajax/adirignoogoula@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `[Portfolio Jesse Ogoula] Nouveau projet : ${formData.name} (${selectedTypeLabel})`,
+          _template: 'table',
+          _captcha: 'false',
+          _replyto: formData.email || undefined,
+          Nom: formData.name,
+          Entreprise: formData.company || 'Non renseignée',
+          Email: formData.email || 'Non renseigné',
+          Telephone_WhatsApp: formData.phone || 'Non renseigné',
+          Type_de_projet: selectedTypeLabel,
+          Format_dechange: selectedChannelLabel + (formData.channel === 'google-meet' ? ' (Visioconférence Google Meet demandée)' : ''),
+          Date_souhaitee: formData.preferredDate || 'À convenir',
+          Creneau: selectedTimeLabel,
+          Description_du_projet: formData.description,
+          Lien_Google_Calendar_Direct: gcalLink,
+        }),
+      });
+    } catch (err) {
+      console.warn('FormSubmit notification error:', err);
+    }
+
+    // 2. Envoyer au Webhook optionnel si configuré dans .env.local
+    const webhookUrl = (import.meta as any).env?.VITE_MEETING_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+      } catch (err) {
+        console.warn('Webhook notification error:', err);
+      }
+    }
+
+    // 3. Tenter d'enregistrer dans Supabase si configuré
+    try {
+      await supabase.from('project_appointments').insert([payload]);
     } catch {
-      // Silently continue if table does not exist
+      // Ignorer si la table n'est pas encore créée
     }
 
     setIsSubmitting(false);
@@ -135,8 +260,6 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
   };
 
   // WhatsApp formatted message link
-  const selectedTypeLabel = projectTypes.find(t => t.id === formData.projectType)?.label || formData.projectType;
-  const selectedTimeLabel = timeSlots.find(t => t.id === formData.preferredTime)?.label || formData.preferredTime;
   const whatsappText = encodeURIComponent(
     `Bonjour Jesse, je souhaite échanger sur mon projet :\n\n` +
     `• Nom : ${formData.name}\n` +
@@ -144,7 +267,7 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     `• Contact : ${formData.phone || formData.email}\n` +
     `• Type de projet : ${selectedTypeLabel}\n` +
     (formData.preferredDate ? `• Date souhaitée : ${formData.preferredDate} (${selectedTimeLabel})\n` : '') +
-    `• Canal : ${formData.channel}\n` +
+    `• Canal : ${selectedChannelLabel}\n` +
     `• Objet : ${formData.description}`
   );
   const whatsappUrl = `https://wa.me/241077617569?text=${whatsappText}`;
@@ -156,21 +279,30 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
     `Nom : ${formData.name}\n` +
     `Société : ${formData.company || 'N/A'}\n` +
     `Téléphone : ${formData.phone || 'N/A'}\n` +
+    `Email : ${formData.email || 'N/A'}\n` +
     `Type de projet : ${selectedTypeLabel}\n` +
     `Date / Créneau souhaité : ${formData.preferredDate || 'À définir'} (${selectedTimeLabel})\n` +
-    `Canal : ${formData.channel}\n\n` +
+    `Canal : ${selectedChannelLabel}\n\n` +
     `Description du projet :\n${formData.description}\n\nCordialement,`
   );
   const mailtoUrl = `mailto:adirignoogoula@gmail.com,contact@ogoulajesse.pro?subject=${emailSubject}&body=${emailBody}`;
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-in fade-in duration-200"
+      data-lenis-prevent="true"
+      className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto overscroll-contain animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
     >
-      <div className="bg-[#0B0B0F] border border-white/10 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative text-[#F4F4F4] my-auto max-h-[92vh] overflow-y-auto">
+      <div
+        data-lenis-prevent="true"
+        className="bg-[#0B0B0F] border border-white/10 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative text-[#F4F4F4] my-auto max-h-[90vh] overflow-y-auto overscroll-contain"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchMove={(e) => e.stopPropagation()}
+      >
         
         {/* Close Button */}
         <button
@@ -197,36 +329,46 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
               </h3>
               <p className="font-sans text-xs sm:text-sm text-[#B5B5B5] max-w-md mx-auto leading-relaxed">
                 {language === 'fr'
-                  ? `Votre projet a bien été enregistré. Pour un retour direct ou convenir du créneau plus rapidement, vous pouvez me notifier en un clic :`
-                  : `Your project briefing has been recorded. For the fastest response or immediate confirmation, feel free to notify me directly:`}
+                  ? `Votre projet a bien été enregistré. Vous pouvez l'ajouter directement à votre calendrier et me notifier instantanément :`
+                  : `Your project briefing has been recorded. You can add it directly to your calendar and notify me instantly:`}
               </p>
             </div>
 
-            {/* Quick Actions Post-Submit */}
+            {/* Quick Actions Post-Submit (Calendar + WhatsApp + Email) */}
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+              <a
+                href={getGoogleCalendarUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#4285F4] hover:bg-[#3367D6] text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-lg shadow-blue-500/10"
+              >
+                <CalendarIcon className="w-4 h-4" />
+                <span>{language === 'fr' ? 'Ajouter à mon Google Calendar' : 'Add to Google Calendar'}</span>
+              </a>
+
               <a
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-black font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-black font-mono text-xs font-bold uppercase tracking-wider rounded-lg transition-colors"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>{language === 'fr' ? 'Notifier sur WhatsApp' : 'Notify via WhatsApp'}</span>
+                <span>{language === 'fr' ? 'Notifier sur WhatsApp' : 'Notify on WhatsApp'}</span>
               </a>
 
               <a
                 href={mailtoUrl}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/15 text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg border border-white/15 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white font-mono text-xs font-bold uppercase tracking-wider rounded-lg border border-white/15 transition-colors"
               >
                 <Phone className="w-4 h-4" />
-                <span>{language === 'fr' ? 'Ouvrir mon Email' : 'Open Email Draft'}</span>
+                <span>{language === 'fr' ? 'Envoyer par Email' : 'Send via Email'}</span>
               </a>
             </div>
 
             <div className="pt-4 hairline-t text-center">
               <button
                 onClick={onClose}
-                className="font-mono text-xs text-[#888] hover:text-white underline underline-offset-4 uppercase tracking-widest transition-colors"
+                className="font-mono text-xs text-[#888] hover:text-white underline underline-offset-4 uppercase tracking-widest transition-colors cursor-pointer"
               >
                 {language === 'fr' ? 'Fermer cette fenêtre' : 'Close window'}
               </button>
@@ -249,20 +391,6 @@ const ProjectMeetingModal: React.FC<ProjectMeetingModalProps> = ({ isOpen, onClo
                   ? 'Une session de 30 minutes sans engagement pour diagnostiquer vos opportunités, clarifier vos objectifs et poser les bases de la collaboration.'
                   : 'A 30-minute discovery call to evaluate your opportunities, clarify objectives, and outline our collaboration roadmap.'}
               </p>
-
-              {/* Calendly shortcut banner */}
-              <div className="mt-4 p-3 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#bbb]">
-                  {language === 'fr' ? 'Vous préférez réserver directement un créneau ?' : 'Prefer booking directly on calendar?'}
-                </span>
-                <a
-                  href="/schedule"
-                  className="inline-flex items-center gap-1 text-[#e07a7a] hover:text-white font-bold uppercase tracking-wider transition-colors ml-2 whitespace-nowrap"
-                >
-                  <span>Calendly</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">

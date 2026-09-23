@@ -16,6 +16,9 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
       wheelMultiplier: 1,
     });
 
+    // Expose lenis instance to window so modals can pause/resume scrolling
+    (window as any).lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -25,6 +28,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
 
     return () => {
       cancelAnimationFrame(rafId);
+      (window as any).lenis = null;
       lenis.destroy();
     };
   }, []);
