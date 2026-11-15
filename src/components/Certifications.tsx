@@ -55,6 +55,12 @@ const Certifications = () => {
       year: '2024',
       image: '/certifications/1.jpeg',
     },
+    {
+      title: language === 'fr' ? "Initiation à KoboToolbox (KoboToolbox Essentials)" : 'KoboToolbox Essentials',
+      organization: 'KoboToolbox Academy',
+      year: '2026',
+      image: '/certifications/KoboToolbox Essentials.png',
+    },
   ];
 
   const openLightbox = (index: number) => setSelectedCert(index);

@@ -14,6 +14,8 @@ interface Certification {
   image: string;
   skills: { fr: string[]; en: string[] };
   description: { fr: string; en: string };
+  credentialId?: string;
+  credentialUrl?: string;
 }
 
 const certificationsData: Certification[] = [
@@ -193,6 +195,30 @@ const certificationsData: Certification[] = [
       en: 'Executive certification in cross-functional team coordination, strategic roadmap milestone execution, stakeholder alignment, and risk-mitigated delivery.',
     },
   },
+  {
+    id: 'kobotoolbox-essentials',
+    num: '09',
+    title: {
+      fr: "COURS D'INITIATION À KOBOTOOLBOX",
+      en: 'KOBOTOOLBOX ESSENTIALS',
+    },
+    issuer: 'KOBOTOOLBOX ACADEMY / KOBO, INC.',
+    issuerBadge: 'KOBOTOOLBOX // DATA & TECH',
+    year: '2026',
+    category: 'ai_product',
+    categoryLabel: { fr: 'IA & PRODUIT', en: 'AI & PRODUCT' },
+    image: '/certifications/KoboToolbox Essentials.png',
+    skills: {
+      fr: ['COLLECTE DE DONNÉES TERRAIN', 'XLSFORM', 'SUIVI & ÉVALUATION', 'GESTION DE DONNÉES'],
+      en: ['FIELD DATA COLLECTION', 'XLSFORM DESIGN', 'MONITORING & EVALUATION', 'DATA MANAGEMENT'],
+    },
+    description: {
+      fr: 'Certification officielle attestant de la maîtrise de la suite KoboToolbox : conception de formulaires d’enquête avancés (XLSForm), déploiement sur terminaux mobiles et gestion sécurisée de données de projets à fort impact.',
+      en: 'Official accreditation validating proficiency in the KoboToolbox platform: mobile survey architecture, advanced XLSForm design, field deployment, and secure project data governance.',
+    },
+    credentialId: 'hkg0rjgqgy',
+    credentialUrl: 'https://academy.kobotoolbox.org/courses/initiation',
+  },
 ];
 
 type CategoryFilter = 'all' | 'ai_product' | 'growth_marketing' | 'pedagogy';
@@ -264,7 +290,9 @@ const CertificationsSection: React.FC = () => {
                   : 'bg-[#0B0B0B] text-[#888] border-[#222] hover:text-white hover:border-[#444]'
               }`}
             >
-              {language === 'fr' ? 'TOUTES // 08' : 'ALL // 08'}
+              {language === 'fr'
+                ? `TOUTES // ${String(certificationsData.length).padStart(2, '0')}`
+                : `ALL // ${String(certificationsData.length).padStart(2, '0')}`}
             </button>
             <button
               onClick={() => setSelectedFilter('ai_product')}
@@ -461,10 +489,30 @@ const CertificationsSection: React.FC = () => {
             {/* Certificate Details Under Image */}
             <div className="w-full mt-4 p-4 bg-[#0B0B0B]/95 border border-[#222] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <div className="font-mono text-[9px] tracking-widest text-[#888] uppercase mb-1 flex items-center gap-2">
+                <div className="font-mono text-[9px] tracking-widest text-[#888] uppercase mb-1 flex items-center gap-2 flex-wrap">
                   <span>{activeCert.issuer}</span>
                   <span>•</span>
                   <span>{activeCert.year}</span>
+                  {activeCert.credentialId && (
+                    <>
+                      <span>•</span>
+                      <span className="text-zinc-400">ID: {activeCert.credentialId}</span>
+                    </>
+                  )}
+                  {activeCert.credentialUrl && (
+                    <>
+                      <span>•</span>
+                      <a
+                        href={activeCert.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-[#F4F4F4] hover:underline"
+                      >
+                        <span>{language === 'fr' ? 'VOIR LA FORMATION' : 'VIEW COURSE'}</span>
+                        <ArrowUpRight className="w-2.5 h-2.5" />
+                      </a>
+                    </>
+                  )}
                 </div>
                 <h3 className="font-sans font-bold text-base sm:text-lg text-white uppercase tracking-tight">
                   {activeCert.title[language]}
